@@ -156,11 +156,11 @@ Our data quality framework implements multiple layers of validation:
 ### Prerequisites
 
 ```bash
-# Install dbt
-pip install dbt-postgres dbt-expectations
-
-# Install additional dependencies
+# For Streamlit dashboard only
 pip install -r requirements.txt
+
+# For full development environment (dbt, testing, etc.)
+pip install -r requirements-dev.txt
 ```
 
 ### Setup Instructions
