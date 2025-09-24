@@ -53,6 +53,22 @@ st.markdown("""
         border-left: 4px solid #27ae60;
         margin: 1rem 0;
     }
+    .stButton > button {
+        width: 100%;
+        border-radius: 6px;
+        border: 1px solid #3498db;
+        background-color: #ffffff;
+        color: #3498db;
+        padding: 0.5rem;
+        margin: 0.25rem 0;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+    .stButton > button:hover {
+        background-color: #3498db;
+        color: #ffffff;
+        box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -673,26 +689,39 @@ def main():
     # Main page navigation (backup if sidebar not visible)
     st.markdown("---")
     st.markdown("### 📍 Navigate to Different Sections:")
-    page_main = st.selectbox(
-        "Or use this dropdown to navigate:",
-        [
-            "Executive Summary",
-            "KPI Dashboard",
-            "Provider Analysis",
-            "Risk Analysis",
-            "Claim Type Analysis",
-            "Processing Efficiency",
-            "Chronic Conditions Impact",
-            "Trends & Patterns",
-            "Data Quality Framework",
-            "Strategic Recommendations"
-        ],
-        key="main_nav"
-    )
 
-    # Use main navigation if different from sidebar
-    if page_main != page:
-        page = page_main
+    # Create navigation buttons in rows
+    col1, col2, col3, col4, col5 = st.columns(5)
+
+    with col1:
+        if st.button("📈 Executive Summary", key="nav_exec"):
+            page = "Executive Summary"
+        if st.button("📋 Claim Types", key="nav_claims"):
+            page = "Claim Type Analysis"
+
+    with col2:
+        if st.button("🎯 KPI Dashboard", key="nav_kpi"):
+            page = "KPI Dashboard"
+        if st.button("⚡ Processing", key="nav_process"):
+            page = "Processing Efficiency"
+
+    with col3:
+        if st.button("🏥 Providers", key="nav_providers"):
+            page = "Provider Analysis"
+        if st.button("🩺 Conditions", key="nav_conditions"):
+            page = "Chronic Conditions Impact"
+
+    with col4:
+        if st.button("👤 Risk Analysis", key="nav_risk"):
+            page = "Risk Analysis"
+        if st.button("📈 Trends", key="nav_trends"):
+            page = "Trends & Patterns"
+
+    with col5:
+        if st.button("🛡️ Data Quality", key="nav_quality"):
+            page = "Data Quality Framework"
+        if st.button("🎯 Recommendations", key="nav_recs"):
+            page = "Strategic Recommendations"
 
     # Display selected section
     if page == "Executive Summary":
