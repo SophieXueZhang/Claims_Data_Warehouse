@@ -11,7 +11,7 @@
 
 ## 📋 Project Overview
 
-The Claims Data Warehouse is a production-ready analytics platform designed to process and analyze CMS Medicare synthetic claims data. This project demonstrates enterprise-level data engineering capabilities including dimensional modeling, data quality testing, and comprehensive analytics.
+The Claims Data Warehouse is a production-ready analytics platform designed to process and analyze healthcare insurance claims data. This project demonstrates enterprise-level data engineering capabilities including dimensional modeling, data quality testing, and comprehensive analytics.
 
 ### 🎯 Key Objectives
 
@@ -24,7 +24,7 @@ The Claims Data Warehouse is a production-ready analytics platform designed to p
 ### 🏗️ Architecture
 
 ```
-├── Raw Data Layer (CMS Medicare Synthetic Claims)
+├── Raw Data Layer (Healthcare Insurance Claims)
 ├── Staging Layer (Data cleaning & standardization)
 ├── Data Mart Layer (Dimensional models)
 └── Analytics Layer (Business metrics & KPIs)
@@ -36,7 +36,7 @@ The Claims Data Warehouse is a production-ready analytics platform designed to p
 
 **Core Structure:**
 - **Central Fact**: `fact_claims` (grain: one row per claim)
-- **Dimensions**: `dim_beneficiaries`, `dim_providers`, `dim_date`
+- **Dimensions**: `dim_members`, `dim_providers`, `dim_date`
 - **Measures**: Financial amounts, processing times, service metrics
 - **Business Keys**: Natural healthcare identifiers preserved
 
@@ -209,14 +209,14 @@ dbt test
 
 ### Data Loading
 
-The project expects CMS Medicare Synthetic Claims data in the following format:
-- Beneficiary summary files
-- Inpatient claims
-- Outpatient claims
-- Carrier claims
-- Provider data
+The project expects healthcare insurance claims data in the following format:
+- Member/beneficiary demographics
+- Inpatient claims (hospital stays)
+- Outpatient claims (clinic visits)
+- Professional claims (physician services)
+- Provider/facility information
 
-**Sample data can be downloaded from**: [CMS.gov Data Portal](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DE_Syn_PUF)
+**Sample data**: Project includes synthetic healthcare data for demonstration purposes
 
 ### Demo Data & Reporting
 
