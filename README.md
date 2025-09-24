@@ -97,29 +97,22 @@ Central fact table containing all claim transactions with comprehensive measures
 
 ### 🎯 Key Performance Indicators
 
-| Metric Category | Key Metrics | Business Value |
-|----------------|-------------|----------------|
-| **Financial** | Average claim amount, Total reimbursement | Cost management |
-| **Quality** | Denial rate, Processing time | Operational efficiency |
-| **Utilization** | Claims per beneficiary, Provider diversity | Care management |
-| **Risk** | High-cost members, Frequent admissions | Population health |
+The analytics models support comprehensive KPI reporting across:
 
-### 📊 Pre-built Analytics
+| Metric Category | Available Metrics | Models |
+|----------------|------------------|---------|
+| **Financial** | Claim amounts, reimbursement totals, cost trends | `metrics_claims_summary` |
+| **Quality** | Denial rates, processing efficiency | `fact_claims` analytics |
+| **Utilization** | Claims volume, member activity patterns | `metrics_beneficiary_utilization` |
+| **Risk** | Member risk stratification, high-cost identification | `metrics_provider_performance` |
 
-#### `metrics_claims_summary`
-- **Daily, weekly, monthly claim metrics**
-- **Denial rates and processing times by claim type**
-- **Volume trends and seasonal patterns**
+### 📊 Analytics Models
 
-#### `metrics_provider_performance`
-- **Provider benchmarking and peer comparisons**
-- **Quality scores and risk classifications**
-- **Specialty-specific performance metrics**
+The project includes three core analytics models:
 
-#### `metrics_beneficiary_utilization`
-- **Member risk stratification**
-- **Care management identifications**
-- **Cost and utilization patterns**
+- **`metrics_claims_summary`**: Daily/weekly/monthly claim aggregations with financial and volume metrics
+- **`metrics_provider_performance`**: Provider benchmarking with specialty comparisons and performance tiers
+- **`metrics_beneficiary_utilization`**: Member risk analysis and utilization pattern identification
 
 ## 🛡️ Data Quality Framework
 
