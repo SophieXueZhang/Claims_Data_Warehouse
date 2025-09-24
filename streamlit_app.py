@@ -302,8 +302,10 @@ def display_executive_summary(data):
             color_discrete_sequence=['#667eea']
         )
         fig_trends.update_layout(height=300, margin=dict(t=20, b=20, l=20, r=20))
-        fig_trends.update_xaxis(title="")
-        fig_trends.update_yaxis(title="Claims")
+        fig_trends.update_layout(
+            xaxis_title="",
+            yaxis_title="Claims"
+        )
         st.plotly_chart(fig_trends, use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -574,7 +576,7 @@ def display_trends(data):
             markers=True,
             color_discrete_sequence=['#a0aec0']
         )
-        fig_avg_value.update_yaxis(tickformat='$,.0f')
+        fig_avg_value.update_layout(yaxis_tickformat='$,.0f')
         fig_avg_value.update_layout(height=400)
         st.plotly_chart(fig_avg_value, use_container_width=True)
 
@@ -588,7 +590,7 @@ def display_trends(data):
             markers=True,
             color_discrete_sequence=['#cbd5e0']
         )
-        fig_denial.update_yaxis(tickformat='.1%')
+        fig_denial.update_layout(yaxis_tickformat='.1%')
         fig_denial.update_layout(height=400)
         st.plotly_chart(fig_denial, use_container_width=True)
 
@@ -601,7 +603,7 @@ def display_trends(data):
             markers=True,
             color_discrete_sequence=['#a0aec0']
         )
-        fig_reimb.update_yaxis(tickformat='.1%')
+        fig_reimb.update_layout(yaxis_tickformat='.1%')
         fig_reimb.update_layout(height=400)
         st.plotly_chart(fig_reimb, use_container_width=True)
 
@@ -669,8 +671,11 @@ def display_claim_type_analysis(data):
             color='claim_type',
             color_discrete_sequence=['#718096', '#a0aec0', '#cbd5e0']
         )
-        fig_bar.update_layout(height=400, showlegend=False)
-        fig_bar.update_yaxis(tickformat='$,.0f')
+        fig_bar.update_layout(
+            height=400,
+            showlegend=False,
+            yaxis_tickformat='$,.0f'
+        )
         st.plotly_chart(fig_bar, use_container_width=True)
 
     # Detailed table
@@ -727,8 +732,10 @@ def display_processing_efficiency(data):
             color_continuous_scale='Greys'
         )
         fig_bar.update_layout(height=400, showlegend=False)
-        fig_bar.update_yaxis(tickformat='.1%')
-        fig_bar.update_xaxis(tickangle=45)
+        fig_bar.update_layout(
+            yaxis_tickformat='.1%',
+            xaxis_tickangle=45
+        )
         st.plotly_chart(fig_bar, use_container_width=True)
 
     # Efficiency insights
@@ -758,8 +765,11 @@ def display_chronic_conditions_impact(data):
             color='avg_cost',
             color_continuous_scale='Greys'
         )
-        fig_bar.update_layout(height=400, showlegend=False)
-        fig_bar.update_yaxis(tickformat='$,.0f')
+        fig_bar.update_layout(
+            height=400,
+            showlegend=False,
+            yaxis_tickformat='$,.0f'
+        )
         st.plotly_chart(fig_bar, use_container_width=True)
 
     with col2:
@@ -774,7 +784,7 @@ def display_chronic_conditions_impact(data):
             hover_name='condition_category'
         )
         fig_scatter.update_layout(height=400)
-        fig_scatter.update_yaxis(tickformat='$,.0f')
+        fig_scatter.update_layout(yaxis_tickformat='$,.0f')
         st.plotly_chart(fig_scatter, use_container_width=True)
 
     # Impact table
