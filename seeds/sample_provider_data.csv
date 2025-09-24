@@ -1,0 +1,11 @@
+npi,nppes_provider_last_org_name,nppes_provider_first_name,nppes_provider_mi,nppes_credentials,nppes_entity_code,provider_type,medicare_participation_indicator,place_of_service,nppes_provider_street1,nppes_provider_street2,nppes_provider_city,nppes_provider_state,nppes_provider_zip,nppes_provider_country,healthcare_provider_taxonomy_code_1,healthcare_provider_taxonomy_code_2,healthcare_provider_taxonomy_code_3
+1234567890,SMITH MEDICAL CENTER,,,,O,Organization,Y,21,123 MAIN ST,,ANYTOWN,CA,12345,US,261QI0500X,,,
+2345678901,JOHNSON,MARY,A,MD,I,Individual,Y,11,456 ELM ST,,SOMEWHERE,NY,54321,US,208D00000X,,,
+3456789012,BROWN HOSPITAL,,,,O,Organization,Y,21,789 OAK AVE,,ELSEWHERE,TX,67890,US,282N00000X,,,
+4567890123,DAVIS,JOHN,B,NP,I,Individual,Y,11,321 PINE ST,,NOWHERE,FL,09876,US,363L00000X,,,
+5678901234,WILSON CLINIC,,,,O,Organization,Y,11,654 MAPLE DR,,ANYWHERE,WA,13579,US,207R00000X,,,
+6789012345,GARCIA,MARIA,C,MD,I,Individual,Y,11,987 CEDAR LN,,SOMEWHERE,IL,24680,US,207Q00000X,,,
+7890123456,ANDERSON,ROBERT,D,DO,I,Individual,Y,11,147 BIRCH RD,,ELSEWHERE,OH,35791,US,207L00000X,,,
+8901234567,TAYLOR SURGERY CENTER,,,,O,Organization,Y,24,258 WALNUT ST,,NOWHERE,NC,46802,US,207T00000X,,,
+9012345678,MARTINEZ,LINDA,E,RN,I,Individual,Y,11,369 SPRUCE AVE,,ANYWHERE,AZ,57913,US,163W00000X,,,
+0123456789,THOMAS DIAGNOSTIC,,,,O,Organization,Y,19,741 CHERRY ST,,SOMEWHERE,GA,68024,US,261QR1300X,,,

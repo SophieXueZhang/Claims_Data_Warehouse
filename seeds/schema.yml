@@ -1,0 +1,62 @@
+version: 2
+
+seeds:
+  - name: sample_beneficiary_summary
+    description: "Sample CMS beneficiary data for demonstration"
+    config:
+      schema: raw
+      alias: beneficiary_summary
+    columns:
+      - name: desynpuf_id
+        description: "De-identified beneficiary ID"
+        tests:
+          - not_null
+          - unique
+
+  - name: sample_provider_data
+    description: "Sample CMS provider data for demonstration"
+    config:
+      schema: raw
+      alias: provider_data
+    columns:
+      - name: npi
+        description: "National Provider Identifier"
+        tests:
+          - not_null
+          - unique
+
+  - name: sample_inpatient_claims
+    description: "Sample inpatient claims for demonstration"
+    config:
+      schema: raw
+      alias: inpatient_claims
+    columns:
+      - name: clm_id
+        description: "Claim ID"
+        tests:
+          - not_null
+          - unique
+
+  - name: sample_outpatient_claims
+    description: "Sample outpatient claims for demonstration"
+    config:
+      schema: raw
+      alias: outpatient_claims
+    columns:
+      - name: clm_id
+        description: "Claim ID"
+        tests:
+          - not_null
+          - unique
+
+  - name: sample_carrier_claims
+    description: "Sample carrier claims for demonstration"
+    config:
+      schema: raw
+      alias: carrier_claims
+    columns:
+      - name: clm_id
+        description: "Claim ID"
+        tests:
+          - not_null
+          - unique
