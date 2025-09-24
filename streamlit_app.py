@@ -9,7 +9,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from pathlib import Path
+import os
 
 # Page configuration
 st.set_page_config(
@@ -60,7 +60,7 @@ st.markdown("""
 def load_report_data():
     """Load the business intelligence report data"""
     try:
-        report_path = Path("reports/business_report_en_2025-09-24.json")
+        report_path = "reports/business_report_en_2025-09-24.json"
         with open(report_path, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
