@@ -35,12 +35,17 @@ st.markdown("""
     footer {visibility: hidden;}
     .stDeployButton {display: none;}
 
-    /* Sidebar styling - Professional dark */
-    .css-1d391kg {
+    /* Sidebar styling - Professional dark - Multiple selectors for compatibility */
+    [data-testid="stSidebar"], .css-1d391kg, .css-1aumxhk, .css-17eq0hr {
         background: #4a5568 !important;
         border-right: none !important;
         padding: 2rem 1rem !important;
         width: 280px !important;
+    }
+
+    /* Ensure sidebar content is visible */
+    [data-testid="stSidebar"] > div {
+        color: white !important;
     }
 
     /* Sidebar navigation items */
@@ -140,8 +145,8 @@ st.markdown("""
         margin-bottom: 1rem;
     }
 
-    /* Hide main navigation buttons */
-    .stButton {
+    /* Only hide main content buttons, not sidebar buttons */
+    .main .stButton {
         display: none !important;
     }
 
@@ -156,15 +161,41 @@ st.markdown("""
         border-bottom: 1px solid #2d3748;
     }
 
-    /* Custom selectbox styling */
-    .stSelectbox {
-        display: none !important;
+    /* Style selectbox but don't hide it */
+    .stSelectbox label {
+        color: #ffffff !important;
+        font-weight: 500 !important;
     }
 
-    /* Hide Streamlit sidebar elements */
-    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
-        display: none;
+    /* Force show sidebar buttons */
+    [data-testid="stSidebar"] .stButton {
+        display: block !important;
+        margin-bottom: 0.5rem !important;
     }
+
+    [data-testid="stSidebar"] .stButton > button {
+        width: 100% !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 8px !important;
+        padding: 0.75rem 1rem !important;
+        text-align: left !important;
+        transition: all 0.2s ease !important;
+    }
+
+    [data-testid="stSidebar"] .stButton > button:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        border-color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    /* Force show sidebar markdown content */
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
+        display: block !important;
+        color: white !important;
+    }
+
+    /* Keep sidebar content visible */
 
     /* News/activity feed */
     .activity-item {
