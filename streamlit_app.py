@@ -19,147 +19,173 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Nordic minimalist styling
+# Professional dashboard styling
 st.markdown("""
 <style>
-    /* Import Nordic-inspired fonts */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-    /* Global Nordic color palette and typography */
+    /* Global styling */
     .stApp {
-        background-color: #fafafa;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         font-family: 'Inter', sans-serif;
-        color: #2d3748;
     }
 
-    /* Main header - Nordic minimalism */
-    .main-header {
-        font-size: 2.8rem;
-        font-weight: 300;
-        color: #1a202c;
-        text-align: center;
-        margin-bottom: 3rem;
-        border-bottom: 1px solid #e2e8f0;
-        padding-bottom: 1.5rem;
-        letter-spacing: -0.025em;
+    /* Hide default Streamlit elements */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    .stDeployButton {display: none;}
+
+    /* Sidebar styling - Professional dark */
+    .css-1d391kg {
+        background: #4a5568 !important;
+        border-right: none !important;
+        padding: 2rem 1rem !important;
+        width: 280px !important;
     }
 
-    /* Metric cards - Clean Nordic design */
-    .metric-container {
-        background: #ffffff;
-        padding: 1.5rem;
-        border-radius: 12px;
-        text-align: center;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        transition: all 0.2s ease;
-    }
-    .metric-container:hover {
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-        transform: translateY(-1px);
-    }
-
-    /* KPI cards - Nordic minimal style */
-    .kpi-card {
-        background: #ffffff;
-        padding: 2rem;
-        border-radius: 16px;
-        border: 1px solid #e2e8f0;
-        margin: 1rem 0;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        transition: all 0.2s ease;
-    }
-    .kpi-card:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-
-    /* Insight boxes - Subtle Nordic accent */
-    .insight-box {
-        background: #f7fafc;
-        padding: 1.5rem;
-        border-radius: 12px;
-        border-left: 3px solid #4a5568;
-        margin: 1.5rem 0;
-        font-weight: 400;
-    }
-
-    /* Navigation buttons - Nordic minimalism */
-    .stButton > button {
-        width: 100%;
-        border-radius: 8px;
-        border: 1px solid #cbd5e0;
-        background-color: #ffffff;
-        color: #4a5568;
-        padding: 0.75rem;
+    /* Sidebar navigation items */
+    .nav-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
         margin: 0.5rem 0;
-        font-weight: 400;
-        font-family: 'Inter', sans-serif;
+        border-radius: 8px;
+        color: #cbd5e0;
+        text-decoration: none;
         transition: all 0.2s ease;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    }
-    .stButton > button:hover {
-        background-color: #f7fafc;
-        border-color: #a0aec0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transform: translateY(-1px);
+        cursor: pointer;
+        font-weight: 400;
     }
 
-    /* Headers and subheaders - Nordic typography */
-    h1, h2, h3, h4 {
-        font-family: 'Inter', sans-serif;
-        font-weight: 500;
-        color: #1a202c;
-        letter-spacing: -0.025em;
-        margin-top: 2rem;
+    .nav-item:hover {
+        background: #2d3748;
+        color: #ffffff;
+        transform: translateX(4px);
+    }
+
+    .nav-item.active {
+        background: #3182ce;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+    }
+
+    .nav-item-icon {
+        margin-right: 0.75rem;
+        font-size: 1.1rem;
+        width: 20px;
+        text-align: center;
+    }
+
+    /* Main content area */
+    .main .block-container {
+        padding: 2rem !important;
+        max-width: none !important;
+    }
+
+    /* Dashboard header */
+    .dashboard-header {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* KPI cards */
+    .kpi-card {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
         margin-bottom: 1rem;
     }
 
-    /* Sidebar styling - Clean Nordic */
-    .css-1d391kg {
-        background-color: #ffffff;
-        border-right: 1px solid #e2e8f0;
+    .kpi-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     }
 
-    /* Data tables - Minimal Nordic style */
-    .stDataFrame {
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        overflow: hidden;
+    .kpi-value {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #1a202c;
+        margin-bottom: 0.5rem;
     }
 
-    /* Metric widgets - Nordic clean look */
-    [data-testid="metric-container"] {
-        background-color: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 1rem;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Charts and plots - Consistent spacing */
-    .js-plotly-plot {
-        border-radius: 8px;
-        background: #ffffff;
-    }
-
-    /* Remove default Streamlit styling */
-    .css-18e3th9 {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
-
-    /* Nordic color overrides for text */
-    .stMarkdown p {
+    .kpi-label {
         color: #4a5568;
-        line-height: 1.6;
+        font-size: 0.9rem;
+        font-weight: 500;
     }
 
-    /* Section dividers */
-    hr {
-        border: none;
-        height: 1px;
-        background: #e2e8f0;
-        margin: 2rem 0;
+    /* Chart containers */
+    .chart-container {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+    }
+
+    .chart-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1a202c;
+        margin-bottom: 1rem;
+    }
+
+    /* Hide main navigation buttons */
+    .stButton {
+        display: none !important;
+    }
+
+    /* Sidebar title */
+    .sidebar-title {
+        color: #ffffff;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        text-align: center;
+        padding: 1rem;
+        border-bottom: 1px solid #2d3748;
+    }
+
+    /* Custom selectbox styling */
+    .stSelectbox {
+        display: none !important;
+    }
+
+    /* Hide Streamlit sidebar elements */
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
+        display: none;
+    }
+
+    /* News/activity feed */
+    .activity-item {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid #3182ce;
+        margin-bottom: 0.75rem;
+        backdrop-filter: blur(10px);
+    }
+
+    .activity-time {
+        font-size: 0.8rem;
+        color: #718096;
+        font-weight: 500;
+    }
+
+    .activity-content {
+        font-size: 0.9rem;
+        color: #2d3748;
+        margin-top: 0.25rem;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -175,18 +201,6 @@ def load_report_data():
         st.error("Report data file not found. Please generate the report first.")
         return None
 
-def display_header():
-    """Display the main header"""
-    st.markdown('<h1 class="main-header">🏥 Claims Data Warehouse - Business Intelligence Dashboard</h1>',
-                unsafe_allow_html=True)
-
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.info("""
-        **📊 Interactive Healthcare Analytics Dashboard**
-        Explore comprehensive claims data insights with real-time KPI monitoring,
-        provider performance analysis, and strategic recommendations.
-        """)
 
 def display_executive_summary(data):
     """Display modern grid-based dashboard layout"""
@@ -890,107 +904,213 @@ def display_recommendations(data):
                     st.write(f"**Current Denial Rate:** {imp['current_denial_rate']:.1%}")
                     st.write(f"**Target Denial Rate:** {imp['target_denial_rate']:.1%}")
 
+def render_sidebar():
+    """Render custom sidebar navigation"""
+    st.sidebar.markdown("""
+    <div class="sidebar-title">
+        🏥 DASHBOARD
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Navigation items
+    nav_items = [
+        ("🏠", "Home", "Executive Summary"),
+        ("📊", "Charts", "KPI Dashboard"),
+        ("🏥", "Providers", "Provider Analysis"),
+        ("👤", "Risk", "Risk Analysis"),
+        ("📋", "Claims", "Claim Type Analysis"),
+        ("⚡", "Processing", "Processing Efficiency"),
+        ("🩺", "Conditions", "Chronic Conditions Impact"),
+        ("📈", "Trends", "Trends & Patterns"),
+        ("🛡️", "Quality", "Data Quality Framework"),
+        ("🎯", "Strategy", "Strategic Recommendations")
+    ]
+
+    selected_page = st.session_state.get('selected_page', 'Executive Summary')
+
+    for icon, label, page_name in nav_items:
+        active_class = "active" if selected_page == page_name else ""
+        if st.sidebar.button(f"{icon} {label}", key=f"nav_{page_name}", use_container_width=True):
+            st.session_state.selected_page = page_name
+            st.rerun()
+
+    # Development section
+    st.sidebar.markdown("""
+    <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #2d3748;">
+        <div style="color: #a0aec0; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.5rem;">DEVELOPMENT</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    return st.session_state.get('selected_page', 'Executive Summary')
+
+def render_dashboard_layout(data, page):
+    """Render main dashboard content with professional layout"""
+
+    # Header
+    st.markdown("""
+    <div class="dashboard-header">
+        <h2 style="margin: 0; color: #1a202c; font-weight: 600;">Healthcare Analytics Dashboard</h2>
+        <p style="margin: 0.5rem 0 0 0; color: #4a5568;">Comprehensive claims data insights and KPI monitoring</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    if page == "Executive Summary":
+        # Top KPI row
+        col1, col2, col3, col4 = st.columns(4)
+
+        exec_data = data['executive_summary']
+        metrics = exec_data['key_metrics']
+
+        with col1:
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-value" style="color: #3182ce;">{metrics['total_claims']:,}</div>
+                <div class="kpi-label">Total Claims</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col2:
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-value" style="color: #ed8936;">${metrics['total_claim_value']/1000000:.0f}M</div>
+                <div class="kpi-label">Total Value</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col3:
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-value" style="color: #38a169;">{metrics['overall_denial_rate']:.1%}</div>
+                <div class="kpi-label">Denial Rate</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col4:
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-value" style="color: #805ad5;">{metrics['avg_processing_days']:.1f}</div>
+                <div class="kpi-label">Avg Processing Days</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        # Charts row
+        col1, col2 = st.columns([2, 1])
+
+        with col1:
+            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+            st.markdown('<div class="chart-title">📈 Monthly Claims Trend</div>', unsafe_allow_html=True)
+
+            trends = data['financial_analysis']['monthly_trends']
+            df_trends = pd.DataFrame(trends)
+
+            fig = px.line(df_trends, x='month', y='claims', markers=True)
+            fig.update_layout(
+                height=300,
+                margin=dict(t=10, b=10, l=10, r=10),
+                plot_bgcolor='rgba(0,0,0,0)',
+                paper_bgcolor='rgba(0,0,0,0)'
+            )
+            fig.update_traces(line_color='#3182ce', marker_color='#3182ce')
+            st.plotly_chart(fig, use_container_width=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        with col2:
+            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+            st.markdown('<div class="chart-title">📊 Recent Activity</div>', unsafe_allow_html=True)
+
+            activities = [
+                {"time": "09:32 AM", "content": "High-risk member alert: Member ID 12345 exceeded $25K in claims"},
+                {"time": "08:45 AM", "content": "Processing efficiency improved by 2.3% this week"},
+                {"time": "07:20 AM", "content": "New provider Metro General added to network"},
+                {"time": "06:15 AM", "content": "Monthly quality report generated successfully"}
+            ]
+
+            for activity in activities:
+                st.markdown(f"""
+                <div class="activity-item">
+                    <div class="activity-time">{activity['time']}</div>
+                    <div class="activity-content">{activity['content']}</div>
+                </div>
+                """, unsafe_allow_html=True)
+
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        # Bottom charts
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+            st.markdown('<div class="chart-title">🏥 Provider Performance</div>', unsafe_allow_html=True)
+
+            providers = data['provider_analysis']['top_providers'][:5]
+            provider_names = [p['name'][:15] + "..." if len(p['name']) > 15 else p['name'] for p in providers]
+            provider_claims = [p['claims'] for p in providers]
+
+            fig = px.bar(x=provider_names, y=provider_claims)
+            fig.update_layout(
+                height=250,
+                margin=dict(t=10, b=10, l=10, r=10),
+                plot_bgcolor='rgba(0,0,0,0)',
+                paper_bgcolor='rgba(0,0,0,0)',
+                showlegend=False
+            )
+            fig.update_traces(marker_color='#38a169')
+            st.plotly_chart(fig, use_container_width=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        with col2:
+            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+            st.markdown('<div class="chart-title">📋 Claim Distribution</div>', unsafe_allow_html=True)
+
+            claim_types = data['executive_summary']['claim_type_distribution']
+            df_claims = pd.DataFrame(claim_types)
+
+            fig = px.pie(df_claims, values='count', names='claim_type')
+            fig.update_layout(
+                height=250,
+                margin=dict(t=10, b=10, l=10, r=10),
+                showlegend=False
+            )
+            fig.update_traces(textinfo='percent+label')
+            st.plotly_chart(fig, use_container_width=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+
+    else:
+        # For other pages, use the existing display functions
+        if page == "KPI Dashboard":
+            display_kpi_dashboard(data)
+        elif page == "Provider Analysis":
+            display_provider_analysis(data)
+        elif page == "Risk Analysis":
+            display_risk_analysis(data)
+        elif page == "Claim Type Analysis":
+            display_claim_type_analysis(data)
+        elif page == "Processing Efficiency":
+            display_processing_efficiency(data)
+        elif page == "Chronic Conditions Impact":
+            display_chronic_conditions_impact(data)
+        elif page == "Trends & Patterns":
+            display_trends(data)
+        elif page == "Data Quality Framework":
+            display_data_quality_framework(data)
+        elif page == "Strategic Recommendations":
+            display_recommendations(data)
+
 def main():
     """Main Streamlit application"""
-
-    # Display header
-    display_header()
 
     # Load data
     data = load_report_data()
 
     if data is None:
+        st.error("Unable to load report data")
         st.stop()
 
-    # Navigation sidebar
-    st.sidebar.title("📊 Dashboard Navigation")
-    st.sidebar.markdown("👈 **Select a section to explore:**")
-    page = st.sidebar.selectbox(
-        "Choose a section:",
-        [
-            "Executive Summary",
-            "KPI Dashboard",
-            "Provider Analysis",
-            "Risk Analysis",
-            "Claim Type Analysis",
-            "Processing Efficiency",
-            "Chronic Conditions Impact",
-            "Trends & Patterns",
-            "Data Quality Framework",
-            "Strategic Recommendations"
-        ]
-    )
+    # Render sidebar navigation
+    selected_page = render_sidebar()
 
-    # Main page navigation (backup if sidebar not visible)
-    st.markdown("---")
-    st.markdown("### 📍 Navigate to Different Sections:")
-
-    # Create navigation buttons in rows
-    col1, col2, col3, col4, col5 = st.columns(5)
-
-    with col1:
-        if st.button("📈 Executive Summary", key="nav_exec"):
-            page = "Executive Summary"
-        if st.button("📋 Claim Types", key="nav_claims"):
-            page = "Claim Type Analysis"
-
-    with col2:
-        if st.button("🎯 KPI Dashboard", key="nav_kpi"):
-            page = "KPI Dashboard"
-        if st.button("⚡ Processing", key="nav_process"):
-            page = "Processing Efficiency"
-
-    with col3:
-        if st.button("🏥 Providers", key="nav_providers"):
-            page = "Provider Analysis"
-        if st.button("🩺 Conditions", key="nav_conditions"):
-            page = "Chronic Conditions Impact"
-
-    with col4:
-        if st.button("👤 Risk Analysis", key="nav_risk"):
-            page = "Risk Analysis"
-        if st.button("📈 Trends", key="nav_trends"):
-            page = "Trends & Patterns"
-
-    with col5:
-        if st.button("🛡️ Data Quality", key="nav_quality"):
-            page = "Data Quality Framework"
-        if st.button("🎯 Recommendations", key="nav_recs"):
-            page = "Strategic Recommendations"
-
-    # Display selected section
-    if page == "Executive Summary":
-        display_executive_summary(data)
-    elif page == "KPI Dashboard":
-        display_kpi_dashboard(data)
-    elif page == "Provider Analysis":
-        display_provider_analysis(data)
-    elif page == "Risk Analysis":
-        display_risk_analysis(data)
-    elif page == "Claim Type Analysis":
-        display_claim_type_analysis(data)
-    elif page == "Processing Efficiency":
-        display_processing_efficiency(data)
-    elif page == "Chronic Conditions Impact":
-        display_chronic_conditions_impact(data)
-    elif page == "Trends & Patterns":
-        display_trends(data)
-    elif page == "Data Quality Framework":
-        display_data_quality_framework(data)
-    elif page == "Strategic Recommendations":
-        display_recommendations(data)
-
-    # Footer
-    st.markdown("---")
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.markdown("""
-        <div style="text-align: center; color: #7f8c8d; font-size: 0.9em;">
-            <p><strong>Claims Data Warehouse</strong> - Healthcare Analytics Platform</p>
-            <p>Built with dbt + PostgreSQL + Python + Streamlit</p>
-            <p><a href="https://github.com/SophieXueZhang/Claims_Data_Warehouse" target="_blank">🔗 View on GitHub</a></p>
-        </div>
-        """, unsafe_allow_html=True)
+    # Render main dashboard content
+    render_dashboard_layout(data, selected_page)
 
 if __name__ == "__main__":
     main()
