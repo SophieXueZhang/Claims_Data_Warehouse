@@ -139,14 +139,16 @@ Our data quality framework implements multiple layers of validation:
 - **Data Consistency**: Cross-table relationship validation
 - **Data Timeliness**: Processing lag monitoring
 
-### Quality Metrics Dashboard
+### Quality Test Coverage
 
-| Quality Dimension | Target | Current Status |
-|------------------|--------|----------------|
-| Completeness | 95%+ | ✅ 98.2% |
-| Accuracy | 99%+ | ✅ 99.7% |
-| Consistency | 100% | ✅ 100% |
-| Timeliness | <24hrs | ✅ 4hrs avg |
+| Test Category | Test Count | Examples |
+|---------------|------------|----------|
+| **Schema Tests** | 45+ tests | Primary keys, foreign keys, not-null constraints |
+| **Business Logic** | 15+ tests | Financial consistency, date validations |
+| **Data Quality** | 10+ tests | Accepted values, uniqueness, relationships |
+| **Total Coverage** | 70+ tests | Comprehensive validation across all models |
+
+*Note: Run `dbt test` to execute all quality validations and generate current metrics*
 
 ## 🚀 Getting Started
 
