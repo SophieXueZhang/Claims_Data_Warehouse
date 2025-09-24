@@ -31,7 +31,7 @@ class ClaimsReportGenerator:
             "key_metrics": {
                 "total_beneficiaries": 10000,
                 "total_providers": 1234,
-                "total_claims": 50000,
+                "total_claims": 50000,  # Demo data for realistic business scenario (actual seed data: 30 claims)
                 "total_claim_value": 485000000,  # $485M
                 "avg_claim_amount": 9700,
                 "overall_denial_rate": 0.023,    # 2.3%
@@ -380,86 +380,64 @@ class ClaimsReportGenerator:
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f8f9fa;
-            line-height: 1.6;
+            background-color: #f5f5f5;
         }}
         .container {{
             max-width: 1200px;
             margin: 0 auto;
             background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }}
         h1 {{
             color: #2c3e50;
-            border-bottom: 4px solid #3498db;
-            padding-bottom: 15px;
-            font-size: 2.2em;
-            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
         }}
         h2 {{
             color: #34495e;
-            margin-top: 40px;
-            font-size: 1.6em;
-            border-left: 4px solid #3498db;
-            padding-left: 15px;
+            margin-top: 30px;
         }}
         h3 {{
-            color: #2c3e50;
+            color: #34495e;
             margin-top: 25px;
-            font-size: 1.3em;
         }}
         .metric-grid {{
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
         }}
         .metric-card {{
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 12px;
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }}
-        .metric-card:hover {{
-            transform: translateY(-2px);
         }}
         .metric-value {{
-            font-size: 2.2em;
+            font-size: 24px;
             font-weight: bold;
-            margin-bottom: 8px;
+            color: #2980b9;
         }}
         .metric-label {{
-            font-size: 0.9em;
-            opacity: 0.9;
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
         }}
         table {{
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            border-radius: 8px;
-            overflow: hidden;
+            margin: 20px 0;
         }}
         th, td {{
-            padding: 15px 12px;
+            padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #e8e9ea;
+            border-bottom: 1px solid #ddd;
         }}
         th {{
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background-color: #3498db;
             color: white;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.85em;
-            letter-spacing: 0.5px;
-        }}
-        tr:hover {{
-            background-color: #f8f9fa;
         }}
         .risk-high {{ color: #e74c3c; font-weight: bold; }}
         .risk-medium {{ color: #f39c12; font-weight: bold; }}
@@ -475,7 +453,7 @@ class ClaimsReportGenerator:
             margin: 25px 0;
         }}
         .insight-card {{
-            background: #f8f9fa;
+            background: #ecf0f1;
             padding: 20px;
             border-radius: 8px;
             border-left: 4px solid #3498db;
@@ -495,11 +473,11 @@ class ClaimsReportGenerator:
             font-weight: bold;
         }}
         .footer {{
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px solid #bdc3c7;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #bdc3c7;
             color: #7f8c8d;
-            font-size: 0.9em;
+            font-size: 12px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
@@ -526,12 +504,13 @@ class ClaimsReportGenerator:
 </head>
 <body>
     <div class="container">
-        <h1>📊 {data['executive_summary']['report_metadata']['title']}</h1>
+        <h1>▪ {data['executive_summary']['report_metadata']['title']}</h1>
 
-        <div style="background: #e8f4fd; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+        <div style="background: #ecf0f1; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid #3498db;">
             <p><strong>Report Date:</strong> {data['executive_summary']['report_metadata']['generated_date']}</p>
             <p><strong>Coverage Period:</strong> {data['executive_summary']['report_metadata']['coverage_period']}</p>
             <p><strong>Data Quality Score:</strong> <span class="status-badge status-excellent">{data['executive_summary']['report_metadata']['data_quality_score']}</span></p>
+            <p><strong>Note:</strong> This report uses demo data for realistic business scenario presentation</p>
         </div>
 
         <div class="metric-grid">
@@ -553,7 +532,7 @@ class ClaimsReportGenerator:
             </div>
         </div>
 
-        <h2>🏥 Top Provider Performance</h2>
+        <h2>▫ Top Provider Performance</h2>
         <table>
             <tr>
                 <th>Rank</th>
@@ -577,7 +556,7 @@ class ClaimsReportGenerator:
             """ for provider in data['provider_analysis']['top_providers']])}
         </table>
 
-        <h2>👤 Member Risk Stratification</h2>
+        <h2>▫ Member Risk Stratification</h2>
         <table>
             <tr>
                 <th>Risk Tier</th>
@@ -599,7 +578,7 @@ class ClaimsReportGenerator:
             """ for tier in data['member_risk_analysis']['risk_stratification']])}
         </table>
 
-        <h2>📊 Processing Efficiency Analysis</h2>
+        <h2>▫ Processing Efficiency Analysis</h2>
         <table>
             <tr>
                 <th>Processing Category</th>
@@ -619,9 +598,9 @@ class ClaimsReportGenerator:
             """ for proc in data['operational_analysis']['processing_efficiency']])}
         </table>
 
-        <h2>🎯 Strategic Recommendations</h2>
+        <h2>▫ Strategic Recommendations</h2>
 
-        <h3>💰 Cost Optimization Opportunities</h3>
+        <h3>▪ Cost Optimization Opportunities</h3>
         {"".join([f"""
         <div class="recommendation-list">
             <h4>{opp['opportunity']}</h4>
@@ -630,7 +609,7 @@ class ClaimsReportGenerator:
         </div>
         """ for opp in data['recommendations']['cost_optimization']])}
 
-        <h3>📈 Quality Improvements</h3>
+        <h3>▪ Quality Improvements</h3>
         {"".join([f"""
         <div class="recommendation-list">
             <h4>{improvement['area']}</h4>
@@ -641,15 +620,15 @@ class ClaimsReportGenerator:
 
         <div class="insights-grid">
             <div class="insight-card">
-                <h4>💡 Key Insight: Cost Control</h4>
+                <h4>▪ Key Insight: Cost Control</h4>
                 <p>High-risk members (8.5% of population) account for nearly 50% of total healthcare costs, presenting significant case management opportunities.</p>
             </div>
             <div class="insight-card">
-                <h4>📈 Key Insight: Quality Excellence</h4>
+                <h4>▪ Key Insight: Quality Excellence</h4>
                 <p>Overall denial rate of 2.3% demonstrates industry-leading claims processing quality and accuracy.</p>
             </div>
             <div class="insight-card">
-                <h4>🎯 Key Insight: Efficiency Gains</h4>
+                <h4>▪ Key Insight: Efficiency Gains</h4>
                 <p>21.2% of claims require processing time >15 days, indicating automation opportunities for routine procedures.</p>
             </div>
         </div>

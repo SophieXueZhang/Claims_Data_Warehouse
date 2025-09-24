@@ -1,0 +1,104 @@
+{
+  "executive_summary": {
+    "report_metadata": {
+      "title": "Claims Data Warehouse - Seed Data Report",
+      "generated_date": "2025-09-24",
+      "analyst": "Sophie Zhang",
+      "coverage_period": "Actual seed data from CSV files",
+      "data_quality_score": "100.0%"
+    },
+    "key_metrics": {
+      "total_beneficiaries": 10,
+      "total_providers": 10,
+      "total_claims": 30,
+      "total_claim_value": 6206,
+      "avg_claim_amount": 206,
+      "overall_denial_rate": 0.0,
+      "avg_processing_days": "N/A"
+    },
+    "claim_type_distribution": [
+      {
+        "claim_type": "Inpatient",
+        "count": 10,
+        "percentage": 33.3,
+        "total_value": 675,
+        "avg_value": 67,
+        "denial_rate": 0.0
+      },
+      {
+        "claim_type": "Outpatient",
+        "count": 10,
+        "percentage": 33.3,
+        "total_value": 4234,
+        "avg_value": 423,
+        "denial_rate": 0.0
+      },
+      {
+        "claim_type": "Carrier",
+        "count": 10,
+        "percentage": 33.3,
+        "total_value": 1297,
+        "avg_value": 129,
+        "denial_rate": 0.0
+      }
+    ]
+  },
+  "provider_analysis": {
+    "top_providers": [
+      {
+        "rank": 1234567891,
+        "name": "nan nan",
+        "specialty": "Y",
+        "claims": "N/A",
+        "avg_amount": "N/A",
+        "denial_rate": 0.0,
+        "performance_tier": "N/A"
+      },
+      {
+        "rank": 2345678902,
+        "name": "MARY",
+        "specialty": "Y",
+        "claims": "N/A",
+        "avg_amount": "N/A",
+        "denial_rate": 0.0,
+        "performance_tier": "N/A"
+      },
+      {
+        "rank": 3456789013,
+        "name": "nan nan",
+        "specialty": "Y",
+        "claims": "N/A",
+        "avg_amount": "N/A",
+        "denial_rate": 0.0,
+        "performance_tier": "N/A"
+      },
+      {
+        "rank": 4567890124,
+        "name": "JOHN",
+        "specialty": "Y",
+        "claims": "N/A",
+        "avg_amount": "N/A",
+        "denial_rate": 0.0,
+        "performance_tier": "N/A"
+      },
+      {
+        "rank": 5678901235,
+        "name": "nan nan",
+        "specialty": "Y",
+        "claims": "N/A",
+        "avg_amount": "N/A",
+        "denial_rate": 0.0,
+        "performance_tier": "N/A"
+      }
+    ]
+  },
+  "member_analysis": {
+    "total_members": 10,
+    "note": "Limited member analysis available from seed data"
+  },
+  "recommendations": {
+    "note": "This report is based on 30 sample claims from seed data files",
+    "data_completeness": "Limited analytics due to small sample size",
+    "production_note": "In production, this would analyze full claims dataset"
+  }
+}
