@@ -97,14 +97,12 @@ Central fact table containing all claim transactions with comprehensive measures
 
 ### 🎯 Key Performance Indicators
 
-The analytics models support comprehensive KPI reporting across:
-
-| Metric Category | Available Metrics | Models |
-|----------------|------------------|---------|
-| **Financial** | Claim amounts, reimbursement totals, cost trends | `metrics_claims_summary` |
-| **Quality** | Denial rates, processing efficiency | `fact_claims` analytics |
-| **Utilization** | Claims volume, member activity patterns | `metrics_beneficiary_utilization` |
-| **Risk** | Member risk stratification, high-cost identification | `metrics_provider_performance` |
+| Metric Category | Key Metrics | Business Value |
+|----------------|-------------|----------------|
+| **Financial** | Average claim amount, Total reimbursement, Cost per member | Cost management and budget planning |
+| **Quality** | Denial rate, Processing time, Accuracy rate | Operational efficiency optimization |
+| **Utilization** | Claims per member, Provider diversity, Services per claim | Care management and network analysis |
+| **Risk** | High-cost members, Frequent users, Emergency visits | Population health and risk management |
 
 ### 📊 Analytics Models
 

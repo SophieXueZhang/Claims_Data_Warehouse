@@ -14,7 +14,34 @@
       "total_claim_value": 485000000,
       "avg_claim_amount": 9700,
       "overall_denial_rate": 0.023,
-      "avg_processing_days": 12.4
+      "avg_processing_days": 12.4,
+      "claims_per_member": 5.0,
+      "provider_diversity": 1234,
+      "total_reimbursement": 474150000,
+      "avg_reimbursement": 9481
+    },
+    "kpi_categories": {
+      "financial": {
+        "avg_claim_amount": 9700,
+        "total_reimbursement": 474150000,
+        "reimbursement_rate": 0.977,
+        "cost_per_member": 48515
+      },
+      "quality": {
+        "denial_rate": 0.023,
+        "processing_time": 12.4,
+        "accuracy_rate": 0.977
+      },
+      "utilization": {
+        "claims_per_member": 5.0,
+        "provider_diversity": 1234,
+        "avg_services_per_claim": 2.3
+      },
+      "risk": {
+        "high_cost_members": 850,
+        "frequent_users": 450,
+        "emergency_visits": 2340
+      }
     },
     "claim_type_distribution": [
       {
