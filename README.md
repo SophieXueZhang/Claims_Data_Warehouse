@@ -6,6 +6,8 @@
 [![SQL](https://img.shields.io/badge/SQL-PostgreSQL-blue.svg)](https://www.postgresql.org/)
 [![Data Quality](https://img.shields.io/badge/Data%20Quality-Tested-green.svg)](#data-quality-framework)
 [![Documentation](https://img.shields.io/badge/Documentation-Complete-brightgreen.svg)](#documentation)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Author](https://img.shields.io/badge/Author-Sophie%20Zhang-blue.svg)](https://www.linkedin.com/in/sophie-xuezhang/)
 
 ## 📋 Project Overview
 
@@ -342,9 +344,9 @@ This project follows enterprise development practices:
 
 ## 📞 Contact
 
-**Project Owner**: [Your Name]
-**Email**: [your.email@domain.com]
-**LinkedIn**: [Your LinkedIn Profile]
+**Project Owner**: Sophie Zhang
+**Email**: haggler-shelf-putt@duck.com
+**LinkedIn**: https://www.linkedin.com/in/sophie-xuezhang/
 
 ---
 
