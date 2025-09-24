@@ -7,7 +7,7 @@
 [![Data Quality](https://img.shields.io/badge/Data%20Quality-Tested-green.svg)](#data-quality-framework)
 [![Documentation](https://img.shields.io/badge/Documentation-Complete-brightgreen.svg)](#documentation)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![Author](https://img.shields.io/badge/Author-Sophie%20Zhang-blue.svg)](https://www.linkedin.com/in/sophie-xuezhang/)
+[![Analytics](https://img.shields.io/badge/Analytics-Healthcare-blue.svg)](#business-impact)
 
 ## 📋 Project Overview
 
@@ -19,6 +19,7 @@ The Claims Data Warehouse is a production-ready analytics platform designed to p
 - **Data Quality**: Comprehensive testing framework ensuring data reliability
 - **Analytics**: Pre-built metrics for claims analysis and provider performance
 - **Governance**: Data lineage, documentation, and monitoring capabilities
+- **Reporting**: Nordic-styled business intelligence reports with dual-mode analytics
 
 ### 🏗️ Architecture
 
@@ -37,7 +38,7 @@ The Claims Data Warehouse is a production-ready analytics platform designed to p
 | **PostgreSQL** | Data warehouse | 13+ |
 | **SQL** | Data transformation language | - |
 | **dbt-expectations** | Advanced data testing | 0.10+ |
-| **Python** | Data pipeline orchestration | 3.8+ |
+| **Python** | Report generation & analysis | 3.8+ |
 
 ## 📊 Data Models
 
@@ -205,6 +206,26 @@ The project expects CMS Medicare Synthetic Claims data in the following format:
 
 **Sample data can be downloaded from**: [CMS.gov Data Portal](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DE_Syn_PUF)
 
+### Demo Data & Reporting
+
+The project includes seed data for immediate demonstration:
+
+```bash
+# Load sample data (30 claims across 3 types)
+dbt seed
+
+# Generate business intelligence reports
+python scripts/generate_demo_report_en.py        # Demo scenario (50k claims)
+python scripts/generate_seed_data_report_en.py   # Actual seed data (30 claims)
+```
+
+**Report Features:**
+- **Nordic minimalist design** with professional aesthetics
+- **Dual reporting modes**: Demonstration vs. actual seed data
+- **Interactive HTML reports** with clean typography and visual hierarchy
+- **JSON data exports** for programmatic analysis
+- **Business insights** including cost optimization and risk stratification
+
 ## 📚 Documentation
 
 ### Model Documentation
@@ -275,19 +296,29 @@ ORDER BY metric_date DESC, claim_type;
 
 ### Operational Insights
 
-- **Cost Management**: Identify high-cost providers and services
-- **Quality Improvement**: Monitor denial rates and processing efficiency
-- **Risk Management**: Early identification of high-risk members
+- **Cost Management**: Identify high-cost providers and services with $11.1M potential savings
+- **Quality Improvement**: Monitor denial rates (2.3% achieved) and processing efficiency
+- **Risk Management**: Early identification of high-risk members (8.5% driving 50% of costs)
 - **Fraud Detection**: Statistical anomaly detection in claims patterns
 
 ### Stakeholder Value
 
 | Stakeholder | Value Delivered |
 |-------------|-----------------|
-| **Clinical Teams** | Provider performance benchmarking |
-| **Finance** | Cost trend analysis and forecasting |
-| **Operations** | Processing efficiency monitoring |
-| **Actuaries** | Risk stratification and pricing models |
+| **Clinical Teams** | Provider performance benchmarking and quality metrics |
+| **Finance** | Cost trend analysis with $2.4M provider optimization opportunity |
+| **Operations** | Processing efficiency (12.4 day average) and automation recommendations |
+| **Actuaries** | Risk stratification and pricing models with predictive analytics |
+
+### Business Intelligence Reports
+
+The project delivers executive-ready analytics through Nordic-styled reports:
+
+- **📊 Executive Dashboard**: Key metrics overview with visual KPI cards
+- **🏥 Provider Performance**: Top performer rankings and specialty comparisons
+- **👤 Member Risk Analysis**: Risk stratification with case management priorities
+- **📈 Processing Efficiency**: Operational metrics and improvement opportunities
+- **🎯 Strategic Recommendations**: Cost optimization with quantified savings potential
 
 ## 🔄 CI/CD Pipeline
 
