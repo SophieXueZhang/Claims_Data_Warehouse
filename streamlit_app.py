@@ -189,43 +189,186 @@ def display_header():
         """)
 
 def display_executive_summary(data):
-    """Display executive summary metrics"""
-    st.header("📈 Executive Dashboard")
+    """Display modern grid-based dashboard layout"""
 
     exec_data = data['executive_summary']
     metrics = exec_data['key_metrics']
+    kpi_data = exec_data['kpi_categories']
+    claim_types = exec_data['claim_type_distribution']
+    trends = data['financial_analysis']['monthly_trends']
+    risk_data = data['member_risk_analysis']['risk_stratification']
+    providers = data['provider_analysis']['top_providers'][:3]  # Top 3 providers
 
-    # Main KPI metrics
+    # Create modern grid layout
+    st.markdown("### 🏥 Healthcare Analytics Overview")
+
+    # Row 1: Main KPI Cards
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.metric(
-            label="Total Claims",
-            value=f"{metrics['total_claims']:,}",
-            delta="Demo Data"
-        )
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    padding: 1.5rem; border-radius: 16px; color: white; text-align: center; margin-bottom: 1rem;">
+            <h3 style="margin: 0; font-size: 2.5rem; font-weight: 300; color: white;">
+                {0:,}
+            </h3>
+            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Total Claims</p>
+        </div>
+        """.format(metrics['total_claims']), unsafe_allow_html=True)
 
     with col2:
-        st.metric(
-            label="Total Claim Value",
-            value=f"${metrics['total_claim_value']/1000000:.0f}M",
-            delta=f"Avg: ${metrics['avg_claim_amount']:,}"
-        )
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                    padding: 1.5rem; border-radius: 16px; color: white; text-align: center; margin-bottom: 1rem;">
+            <h3 style="margin: 0; font-size: 2.5rem; font-weight: 300; color: white;">
+                ${0:.0f}M
+            </h3>
+            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Total Value</p>
+        </div>
+        """.format(metrics['total_claim_value']/1000000), unsafe_allow_html=True)
 
     with col3:
-        st.metric(
-            label="Denial Rate",
-            value=f"{metrics['overall_denial_rate']:.1%}",
-            delta="Industry Leading",
-            delta_color="inverse"
-        )
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                    padding: 1.5rem; border-radius: 16px; color: white; text-align: center; margin-bottom: 1rem;">
+            <h3 style="margin: 0; font-size: 2.5rem; font-weight: 300; color: white;">
+                {0:.1%}
+            </h3>
+            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Denial Rate</p>
+        </div>
+        """.format(metrics['overall_denial_rate']), unsafe_allow_html=True)
 
     with col4:
-        st.metric(
-            label="Processing Days",
-            value=f"{metrics['avg_processing_days']:.1f}",
-            delta="Average"
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+                    padding: 1.5rem; border-radius: 16px; color: white; text-align: center; margin-bottom: 1rem;">
+            <h3 style="margin: 0; font-size: 2.5rem; font-weight: 300; color: white;">
+                {0:.1f}
+            </h3>
+            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Avg Processing Days</p>
+        </div>
+        """.format(metrics['avg_processing_days']), unsafe_allow_html=True)
+
+    # Row 2: Charts and detailed cards
+    col1, col2, col3 = st.columns([2, 2, 1])
+
+    with col1:
+        # Claim type distribution chart
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-radius: 16px;
+                    border: 1px solid #e2e8f0; margin-bottom: 1rem; height: 400px;">
+        """, unsafe_allow_html=True)
+        st.subheader("📋 Claim Distribution")
+
+        df_claims = pd.DataFrame(claim_types)
+        fig_claims = px.pie(
+            df_claims,
+            values='count',
+            names='claim_type',
+            color_discrete_sequence=['#667eea', '#f093fb', '#4facfe']
         )
+        fig_claims.update_layout(height=300, margin=dict(t=20, b=20, l=20, r=20))
+        st.plotly_chart(fig_claims, use_container_width=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    with col2:
+        # Monthly trends
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-radius: 16px;
+                    border: 1px solid #e2e8f0; margin-bottom: 1rem; height: 400px;">
+        """, unsafe_allow_html=True)
+        st.subheader("📈 Monthly Trends")
+
+        df_trends = pd.DataFrame(trends)
+        fig_trends = px.line(
+            df_trends,
+            x='month',
+            y='claims',
+            markers=True,
+            color_discrete_sequence=['#667eea']
+        )
+        fig_trends.update_layout(height=300, margin=dict(t=20, b=20, l=20, r=20))
+        fig_trends.update_xaxis(title="")
+        fig_trends.update_yaxis(title="Claims")
+        st.plotly_chart(fig_trends, use_container_width=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    with col3:
+        # Risk summary
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-radius: 16px;
+                    border: 1px solid #e2e8f0; margin-bottom: 1rem; height: 400px;">
+            <h4 style="margin-top: 0; color: #1a202c;">👤 Risk Summary</h4>
+        """, unsafe_allow_html=True)
+
+        for tier in risk_data:
+            color = "#ef4444" if tier['risk_tier'] == "High Risk" else "#f59e0b" if tier['risk_tier'] == "Medium Risk" else "#10b981"
+            st.markdown(f"""
+            <div style="margin: 1rem 0; padding: 0.75rem; background: {color}15;
+                        border-left: 3px solid {color}; border-radius: 6px;">
+                <strong>{tier['risk_tier']}</strong><br>
+                <span style="font-size: 0.9rem; color: #666;">{tier['count']:,} members</span><br>
+                <span style="font-size: 0.9rem; color: #666;">{tier['total_cost_pct']:.1f}% of costs</span>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    # Row 3: Financial details and provider summary
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-radius: 16px;
+                    border: 1px solid #e2e8f0; margin-bottom: 1rem;">
+            <h4 style="margin-top: 0; color: #1a202c;">💰 Financial Metrics</h4>
+        """, unsafe_allow_html=True)
+
+        financial = kpi_data['financial']
+
+        st.markdown(f"""
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                <div style="font-size: 1.5rem; font-weight: bold; color: #1a202c;">${financial['avg_claim_amount']:,}</div>
+                <div style="font-size: 0.8rem; color: #666;">Avg Claim</div>
+            </div>
+            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                <div style="font-size: 1.5rem; font-weight: bold; color: #1a202c;">{financial['reimbursement_rate']:.1%}</div>
+                <div style="font-size: 0.8rem; color: #666;">Reimb Rate</div>
+            </div>
+            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                <div style="font-size: 1.5rem; font-weight: bold; color: #1a202c;">${financial['cost_per_member']:,}</div>
+                <div style="font-size: 0.8rem; color: #666;">Cost/Member</div>
+            </div>
+            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                <div style="font-size: 1.5rem; font-weight: bold; color: #1a202c;">${financial['total_reimbursement']/1000000:.0f}M</div>
+                <div style="font-size: 0.8rem; color: #666;">Total Reimb</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-radius: 16px;
+                    border: 1px solid #e2e8f0; margin-bottom: 1rem;">
+            <h4 style="margin-top: 0; color: #1a202c;">🏥 Top Providers</h4>
+        """, unsafe_allow_html=True)
+
+        for i, provider in enumerate(providers):
+            rank_color = "#10b981" if i == 0 else "#f59e0b" if i == 1 else "#6b7280"
+            st.markdown(f"""
+            <div style="margin: 0.75rem 0; padding: 0.75rem; background: #f8fafc; border-radius: 8px;
+                        border-left: 3px solid {rank_color};">
+                <div style="font-weight: 600; color: #1a202c;">#{provider['rank']} {provider['name']}</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">
+                    {provider['specialty']} • {provider['claims']:,} claims • {provider['denial_rate']:.1%} denial rate
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("</div>", unsafe_allow_html=True)
 
 def display_kpi_dashboard(data):
     """Display comprehensive KPI dashboard"""
