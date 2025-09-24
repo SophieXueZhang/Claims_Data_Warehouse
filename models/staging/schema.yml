@@ -1,0 +1,183 @@
+version: 2
+
+models:
+  - name: stg_cms_beneficiaries
+    description: "Staging model for CMS Medicare beneficiary data with basic cleaning and standardization"
+    columns:
+      - name: beneficiary_id
+        description: "Unique identifier for each beneficiary"
+        tests:
+          - not_null
+          - unique
+
+      - name: beneficiary_code
+        description: "CMS beneficiary code"
+        tests:
+          - not_null
+
+      - name: date_of_birth
+        description: "Beneficiary date of birth"
+        tests:
+          - not_null
+
+      - name: date_of_death
+        description: "Date of death (if applicable)"
+
+      - name: gender
+        description: "Beneficiary gender (M/F)"
+        tests:
+          - accepted_values:
+              values: ['M', 'F', 'U']  # U for Unknown
+
+      - name: race_code
+        description: "Race code as defined by CMS"
+        tests:
+          - not_null
+
+      - name: enrollment_start_date
+        description: "Date beneficiary enrolled in Medicare"
+        tests:
+          - not_null
+
+      - name: enrollment_end_date
+        description: "Date beneficiary dis-enrolled from Medicare"
+
+      - name: county_code
+        description: "County code of beneficiary residence"
+
+      - name: state_code
+        description: "State code of beneficiary residence"
+        tests:
+          - not_null
+
+  - name: stg_cms_providers
+    description: "Staging model for CMS Medicare provider data with basic cleaning and standardization"
+    columns:
+      - name: provider_id
+        description: "Unique identifier for each provider"
+        tests:
+          - not_null
+          - unique
+
+      - name: npi
+        description: "National Provider Identifier"
+        tests:
+          - not_null
+          - unique
+
+      - name: provider_name
+        description: "Provider name"
+        tests:
+          - not_null
+
+      - name: provider_type
+        description: "Type of provider (Individual, Organization)"
+        tests:
+          - accepted_values:
+              values: ['Individual', 'Organization']
+
+      - name: specialty_code
+        description: "Provider specialty code"
+
+      - name: specialty_description
+        description: "Provider specialty description"
+
+      - name: address_line_1
+        description: "Provider address line 1"
+
+      - name: city
+        description: "Provider city"
+
+      - name: state_code
+        description: "Provider state code"
+        tests:
+          - not_null
+
+      - name: zip_code
+        description: "Provider ZIP code"
+
+      - name: county_code
+        description: "Provider county code"
+
+  - name: stg_cms_claims
+    description: "Staging model for CMS Medicare claims data with basic cleaning and standardization"
+    columns:
+      - name: claim_id
+        description: "Unique identifier for each claim"
+        tests:
+          - not_null
+          - unique
+
+      - name: beneficiary_id
+        description: "Foreign key to beneficiary"
+        tests:
+          - not_null
+
+      - name: provider_id
+        description: "Foreign key to provider"
+        tests:
+          - not_null
+
+      - name: claim_type
+        description: "Type of claim (Inpatient, Outpatient, Carrier, etc.)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Inpatient', 'Outpatient', 'Carrier', 'DME', 'Hospice', 'SNF']
+
+      - name: claim_start_date
+        description: "Claim service start date"
+        tests:
+          - not_null
+
+      - name: claim_end_date
+        description: "Claim service end date"
+        tests:
+          - not_null
+
+      - name: admission_date
+        description: "Hospital admission date (for inpatient claims)"
+
+      - name: discharge_date
+        description: "Hospital discharge date (for inpatient claims)"
+
+      - name: claim_amount
+        description: "Total claim amount"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: "{{ var('max_claim_amount') }}"
+
+      - name: reimbursement_amount
+        description: "Amount reimbursed by Medicare"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: deductible_amount
+        description: "Beneficiary deductible amount"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: claim_status
+        description: "Status of the claim (Paid, Denied, Pending)"
+        tests:
+          - accepted_values:
+              values: ['Paid', 'Denied', 'Pending', 'Partial']
+
+      - name: diagnosis_code_1
+        description: "Primary diagnosis code (ICD-10)"
+
+      - name: procedure_code_1
+        description: "Primary procedure code (CPT/HCPCS)"
+
+      - name: created_at
+        description: "Timestamp when claim was created"
+        tests:
+          - not_null
+
+      - name: processed_at
+        description: "Timestamp when claim was processed"

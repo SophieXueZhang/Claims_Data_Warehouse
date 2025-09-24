@@ -1,0 +1,266 @@
+name: dbt CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  DBT_PROFILES_DIR: ./
+  DBT_USER: ${{ secrets.DBT_USER }}
+  DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+  DBT_PROD_HOST: ${{ secrets.DBT_PROD_HOST }}
+  DBT_PROD_USER: ${{ secrets.DBT_PROD_USER }}
+  DBT_PROD_PASSWORD: ${{ secrets.DBT_PROD_PASSWORD }}
+
+jobs:
+  lint:
+    name: Code Quality & Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install sqlfluff dbt-postgres dbt-expectations audit_helper codegen dbt_profiler
+
+      - name: Lint SQL with SQLFluff
+        run: |
+          sqlfluff lint models/
+        continue-on-error: true
+
+      - name: Check dbt project structure
+        run: |
+          dbt parse
+          dbt compile
+
+  test-staging:
+    name: Test on Staging Environment
+    runs-on: ubuntu-latest
+    needs: lint
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install dbt dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install dbt-postgres dbt-expectations audit_helper codegen dbt_profiler
+          dbt deps
+
+      - name: Run dbt debug
+        run: dbt debug --target staging
+
+      - name: Create staging schema
+        run: |
+          dbt run-operation create_staging_schema
+        continue-on-error: true
+
+      - name: Build staging models
+        run: |
+          dbt seed --target staging
+          dbt run --target staging --models staging
+
+      - name: Test staging models
+        run: |
+          dbt test --target staging --models staging
+
+      - name: Build core models (if staging tests pass)
+        run: |
+          dbt run --target staging --models marts.core
+
+      - name: Test core models
+        run: |
+          dbt test --target staging --models marts.core
+
+      - name: Build analytics models
+        run: |
+          dbt run --target staging --models marts.analytics
+
+      - name: Test analytics models
+        run: |
+          dbt test --target staging --models marts.analytics
+
+      - name: Generate documentation
+        run: |
+          dbt docs generate --target staging
+
+      - name: Upload documentation artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dbt-docs-staging
+          path: target/
+
+      - name: Run data quality report
+        run: |
+          dbt run-operation generate_data_quality_report --target staging
+        continue-on-error: true
+
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [lint]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install dbt dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install dbt-postgres dbt-expectations audit_helper codegen dbt_profiler
+          dbt deps
+
+      - name: Run dbt debug
+        run: dbt debug --target prod
+
+      - name: Pre-deployment backup
+        run: |
+          dbt run-operation backup_production_schema
+        continue-on-error: true
+
+      - name: Deploy staging models
+        run: |
+          dbt seed --target prod --full-refresh
+          dbt run --target prod --models staging
+
+      - name: Test staging layer
+        run: |
+          dbt test --target prod --models staging
+
+      - name: Deploy core models
+        run: |
+          dbt run --target prod --models marts.core
+
+      - name: Test core layer
+        run: |
+          dbt test --target prod --models marts.core
+
+      - name: Deploy analytics models
+        run: |
+          dbt run --target prod --models marts.analytics
+
+      - name: Test analytics layer
+        run: |
+          dbt test --target prod --models marts.analytics
+
+      - name: Run comprehensive data quality tests
+        run: |
+          dbt test --target prod
+
+      - name: Generate production documentation
+        run: |
+          dbt docs generate --target prod
+
+      - name: Upload production documentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: dbt-docs-production
+          path: target/
+
+      - name: Update data freshness
+        run: |
+          dbt source freshness --target prod
+        continue-on-error: true
+
+      - name: Send deployment notification
+        run: |
+          echo "✅ Production deployment completed successfully"
+          echo "📊 Models deployed: $(dbt ls --target prod --models marts | wc -l)"
+          echo "🧪 Tests passed: $(dbt test --target prod --store-failures | grep -c PASS)"
+        continue-on-error: true
+
+  performance-monitoring:
+    name: Performance & Quality Monitoring
+    runs-on: ubuntu-latest
+    needs: deploy-production
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install dbt-postgres dbt-expectations audit_helper codegen dbt_profiler
+          dbt deps
+
+      - name: Run performance profiling
+        run: |
+          dbt run-operation profile_models --target prod
+        continue-on-error: true
+
+      - name: Check data quality metrics
+        run: |
+          dbt run-operation generate_data_quality_report --target prod
+        continue-on-error: true
+
+      - name: Monitor query performance
+        run: |
+          dbt run-operation check_query_performance --target prod
+        continue-on-error: true
+
+      - name: Generate quality dashboard
+        run: |
+          echo "📈 Data Quality Dashboard"
+          echo "========================="
+          dbt run-operation quality_summary --target prod
+        continue-on-error: true
+
+  security-scan:
+    name: Security & Compliance Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Scan for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: main
+          head: HEAD
+
+      - name: Check for hardcoded credentials
+        run: |
+          # Check for potential credential leaks
+          grep -r "password\|secret\|key" --include="*.sql" --include="*.yml" models/ || echo "No credentials found in models"
+
+      - name: Validate schema permissions
+        run: |
+          echo "🔒 Schema permission validation would run here"
+        continue-on-error: true

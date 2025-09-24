@@ -1,0 +1,185 @@
+version: 2
+
+models:
+  - name: dim_providers
+    description: "Provider dimension table with comprehensive provider information and business classifications"
+    columns:
+      - name: provider_key
+        description: "Surrogate key for provider dimension"
+        tests:
+          - not_null
+          - unique
+
+      - name: provider_id
+        description: "Business key - NPI (National Provider Identifier)"
+        tests:
+          - not_null
+          - unique
+
+      - name: provider_name
+        description: "Provider name (individual or organization)"
+        tests:
+          - not_null
+
+      - name: provider_type
+        description: "Individual or Organization"
+        tests:
+          - accepted_values:
+              values: ['Individual', 'Organization', 'Unknown']
+
+      - name: specialty_description
+        description: "Primary specialty of the provider"
+
+      - name: state_code
+        description: "Provider state of practice"
+
+      - name: participates_in_medicare
+        description: "Whether provider participates in Medicare"
+
+      - name: is_active
+        description: "Current active status of provider"
+
+  - name: dim_beneficiaries
+    description: "Beneficiary dimension table with demographics and chronic conditions"
+    columns:
+      - name: beneficiary_key
+        description: "Surrogate key for beneficiary dimension"
+        tests:
+          - not_null
+          - unique
+
+      - name: beneficiary_id
+        description: "Business key - CMS beneficiary ID"
+        tests:
+          - not_null
+          - unique
+
+      - name: gender
+        description: "Beneficiary gender"
+        tests:
+          - accepted_values:
+              values: ['M', 'F', 'U']
+
+      - name: age_group
+        description: "Age group classification"
+        tests:
+          - accepted_values:
+              values: ['Under 65', '65-74', '75-84', '85+', 'Unknown']
+
+      - name: chronic_condition_count
+        description: "Number of chronic conditions"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 20
+
+      - name: risk_score
+        description: "Calculated risk score based on demographics and conditions"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0.0
+              max_value: 10.0
+
+  - name: fact_claims
+    description: "Claims fact table with all claim transactions and measures"
+    columns:
+      - name: claim_key
+        description: "Surrogate key for claim fact"
+        tests:
+          - not_null
+          - unique
+
+      - name: claim_id
+        description: "Business key - CMS claim ID"
+        tests:
+          - not_null
+          - unique
+
+      - name: beneficiary_key
+        description: "Foreign key to dim_beneficiaries"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_beneficiaries')
+              field: beneficiary_key
+
+      - name: provider_key
+        description: "Foreign key to dim_providers"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_providers')
+              field: provider_key
+
+      - name: claim_date_key
+        description: "Date dimension key for claim service date"
+        tests:
+          - not_null
+
+      - name: claim_amount
+        description: "Total claim amount"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: reimbursement_amount
+        description: "Amount reimbursed by Medicare"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: claim_type
+        description: "Type of claim"
+        tests:
+          - accepted_values:
+              values: ['Inpatient', 'Outpatient', 'Carrier', 'DME', 'Hospice', 'SNF']
+
+      - name: claim_status
+        description: "Claim processing status"
+        tests:
+          - accepted_values:
+              values: ['Paid', 'Denied', 'Pending', 'Partial']
+
+      - name: processing_days
+        description: "Number of days to process the claim"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 365
+
+  - name: dim_date
+    description: "Date dimension table for time-based analysis"
+    columns:
+      - name: date_key
+        description: "Date key in YYYYMMDD format"
+        tests:
+          - not_null
+          - unique
+
+      - name: full_date
+        description: "Full date value"
+        tests:
+          - not_null
+          - unique
+
+      - name: year
+        description: "Year"
+        tests:
+          - not_null
+
+      - name: month
+        description: "Month number"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 12
+
+      - name: day_of_week
+        description: "Day of week number"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 7

@@ -1,0 +1,103 @@
+version: 2
+
+models:
+  - name: metrics_claims_summary
+    description: "Comprehensive claims metrics by various dimensions"
+    columns:
+      - name: metric_date
+        description: "Date for the metric calculation"
+        tests:
+          - not_null
+
+      - name: metric_period
+        description: "Period type (daily, weekly, monthly, quarterly)"
+        tests:
+          - accepted_values:
+              values: ['daily', 'weekly', 'monthly', 'quarterly', 'yearly']
+
+      - name: avg_claim_amount
+        description: "Average claim amount for the period"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: denial_rate
+        description: "Percentage of claims denied"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1
+
+      - name: avg_processing_days
+        description: "Average days to process claims"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+  - name: metrics_provider_performance
+    description: "Provider-level performance metrics"
+    columns:
+      - name: provider_key
+        description: "Foreign key to dim_providers"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_providers')
+              field: provider_key
+
+      - name: provider_name
+        description: "Provider name"
+        tests:
+          - not_null
+
+      - name: total_claims
+        description: "Total number of claims"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: avg_claim_amount
+        description: "Average claim amount"
+        tests:
+          - not_null
+
+      - name: denial_rate
+        description: "Provider denial rate"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1
+
+  - name: metrics_beneficiary_utilization
+    description: "Beneficiary utilization patterns and risk indicators"
+    columns:
+      - name: beneficiary_key
+        description: "Foreign key to dim_beneficiaries"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_beneficiaries')
+              field: beneficiary_key
+
+      - name: total_claims
+        description: "Total claims for beneficiary"
+        tests:
+          - not_null
+
+      - name: total_cost
+        description: "Total cost of care"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: risk_score
+        description: "Calculated risk score"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0.0
+              max_value: 10.0

@@ -1,0 +1,125 @@
+version: 2
+
+sources:
+  - name: cms_raw
+    description: "Raw CMS Medicare synthetic claims data"
+    database: claims_warehouse
+    schema: raw
+    tables:
+      - name: beneficiary_summary
+        description: "CMS beneficiary summary file with demographics and chronic conditions"
+        columns:
+          - name: desynpuf_id
+            description: "De-identified beneficiary ID"
+            tests:
+              - not_null
+              - unique
+
+          - name: bene_birth_dt
+            description: "Beneficiary birth date"
+
+          - name: bene_death_dt
+            description: "Beneficiary death date"
+
+          - name: bene_sex_ident_cd
+            description: "Beneficiary gender code"
+
+          - name: bene_race_cd
+            description: "Beneficiary race code"
+
+          - name: sp_state_code
+            description: "State of residence code"
+
+        freshness:
+          warn_after: {count: 12, period: hour}
+          error_after: {count: 24, period: hour}
+
+      - name: inpatient_claims
+        description: "CMS inpatient claims data"
+        columns:
+          - name: clm_id
+            description: "Claim ID"
+            tests:
+              - not_null
+              - unique
+
+          - name: desynpuf_id
+            description: "De-identified beneficiary ID"
+            tests:
+              - not_null
+
+          - name: prvdr_num
+            description: "Provider number"
+
+          - name: clm_from_dt
+            description: "Claim from date"
+
+          - name: clm_thru_dt
+            description: "Claim through date"
+
+          - name: clm_pmt_amt
+            description: "Claim payment amount"
+
+        freshness:
+          warn_after: {count: 6, period: hour}
+          error_after: {count: 12, period: hour}
+
+      - name: outpatient_claims
+        description: "CMS outpatient claims data"
+        columns:
+          - name: clm_id
+            description: "Claim ID"
+            tests:
+              - not_null
+              - unique
+
+          - name: desynpuf_id
+            description: "De-identified beneficiary ID"
+            tests:
+              - not_null
+
+          - name: prvdr_num
+            description: "Provider number"
+
+        freshness:
+          warn_after: {count: 6, period: hour}
+          error_after: {count: 12, period: hour}
+
+      - name: carrier_claims
+        description: "CMS carrier claims data (physician services)"
+        columns:
+          - name: clm_id
+            description: "Claim ID"
+            tests:
+              - not_null
+
+          - name: desynpuf_id
+            description: "De-identified beneficiary ID"
+            tests:
+              - not_null
+
+          - name: prvdr_npi
+            description: "Provider NPI"
+
+        freshness:
+          warn_after: {count: 6, period: hour}
+          error_after: {count: 12, period: hour}
+
+      - name: provider_data
+        description: "CMS provider master data"
+        columns:
+          - name: npi
+            description: "National Provider Identifier"
+            tests:
+              - not_null
+              - unique
+
+          - name: nppes_provider_last_org_name
+            description: "Provider name (last name or organization)"
+
+          - name: provider_type
+            description: "Provider type"
+
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
