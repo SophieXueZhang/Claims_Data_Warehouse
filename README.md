@@ -30,6 +30,16 @@ The Claims Data Warehouse is a production-ready analytics platform designed to p
 └── Analytics Layer (Business metrics & KPIs)
 ```
 
+### Star Schema Design
+
+![Star Schema](docs/star_schema_diagram.md)
+
+**Core Structure:**
+- **Central Fact**: `fact_claims` (grain: one row per claim)
+- **Dimensions**: `dim_beneficiaries`, `dim_providers`, `dim_date`
+- **Measures**: Financial amounts, processing times, service metrics
+- **Business Keys**: Natural healthcare identifiers preserved
+
 ## 🔧 Technologies Used
 
 | Technology | Purpose | Version |
