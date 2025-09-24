@@ -16,7 +16,7 @@ st.set_page_config(
     page_title="Claims Data Warehouse - BI Dashboard",
     page_icon="🏥",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 # Custom CSS for professional styling
@@ -653,6 +653,7 @@ def main():
 
     # Navigation sidebar
     st.sidebar.title("📊 Dashboard Navigation")
+    st.sidebar.markdown("👈 **Select a section to explore:**")
     page = st.sidebar.selectbox(
         "Choose a section:",
         [
@@ -668,6 +669,30 @@ def main():
             "Strategic Recommendations"
         ]
     )
+
+    # Main page navigation (backup if sidebar not visible)
+    st.markdown("---")
+    st.markdown("### 📍 Navigate to Different Sections:")
+    page_main = st.selectbox(
+        "Or use this dropdown to navigate:",
+        [
+            "Executive Summary",
+            "KPI Dashboard",
+            "Provider Analysis",
+            "Risk Analysis",
+            "Claim Type Analysis",
+            "Processing Efficiency",
+            "Chronic Conditions Impact",
+            "Trends & Patterns",
+            "Data Quality Framework",
+            "Strategic Recommendations"
+        ],
+        key="main_nav"
+    )
+
+    # Use main navigation if different from sidebar
+    if page_main != page:
+        page = page_main
 
     # Display selected section
     if page == "Executive Summary":
