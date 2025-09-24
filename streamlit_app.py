@@ -19,55 +19,147 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for professional styling
+# Nordic minimalist styling
 st.markdown("""
 <style>
+    /* Import Nordic-inspired fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+    /* Global Nordic color palette and typography */
+    .stApp {
+        background-color: #fafafa;
+        font-family: 'Inter', sans-serif;
+        color: #2d3748;
+    }
+
+    /* Main header - Nordic minimalism */
     .main-header {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
         font-weight: 300;
-        color: #2c3e50;
+        color: #1a202c;
         text-align: center;
-        margin-bottom: 2rem;
-        border-bottom: 3px solid #3498db;
-        padding-bottom: 1rem;
+        margin-bottom: 3rem;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 1.5rem;
+        letter-spacing: -0.025em;
     }
+
+    /* Metric cards - Clean Nordic design */
     .metric-container {
-        background: #ecf0f1;
-        padding: 1rem;
-        border-radius: 8px;
-        text-align: center;
-        border-left: 4px solid #3498db;
-    }
-    .kpi-card {
         background: #ffffff;
         padding: 1.5rem;
-        border-radius: 8px;
-        border-left: 4px solid #3498db;
-        margin: 0.5rem 0;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-radius: 12px;
+        text-align: center;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease;
     }
-    .insight-box {
-        background: #f8f9fa;
-        padding: 1rem;
-        border-radius: 8px;
-        border-left: 4px solid #27ae60;
+    .metric-container:hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        transform: translateY(-1px);
+    }
+
+    /* KPI cards - Nordic minimal style */
+    .kpi-card {
+        background: #ffffff;
+        padding: 2rem;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
         margin: 1rem 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease;
     }
+    .kpi-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Insight boxes - Subtle Nordic accent */
+    .insight-box {
+        background: #f7fafc;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-left: 3px solid #4a5568;
+        margin: 1.5rem 0;
+        font-weight: 400;
+    }
+
+    /* Navigation buttons - Nordic minimalism */
     .stButton > button {
         width: 100%;
-        border-radius: 6px;
-        border: 1px solid #3498db;
+        border-radius: 8px;
+        border: 1px solid #cbd5e0;
         background-color: #ffffff;
-        color: #3498db;
-        padding: 0.5rem;
-        margin: 0.25rem 0;
-        font-weight: 500;
-        transition: all 0.3s;
+        color: #4a5568;
+        padding: 0.75rem;
+        margin: 0.5rem 0;
+        font-weight: 400;
+        font-family: 'Inter', sans-serif;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
     .stButton > button:hover {
-        background-color: #3498db;
-        color: #ffffff;
-        box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+        background-color: #f7fafc;
+        border-color: #a0aec0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+    }
+
+    /* Headers and subheaders - Nordic typography */
+    h1, h2, h3, h4 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        color: #1a202c;
+        letter-spacing: -0.025em;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Sidebar styling - Clean Nordic */
+    .css-1d391kg {
+        background-color: #ffffff;
+        border-right: 1px solid #e2e8f0;
+    }
+
+    /* Data tables - Minimal Nordic style */
+    .stDataFrame {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    /* Metric widgets - Nordic clean look */
+    [data-testid="metric-container"] {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Charts and plots - Consistent spacing */
+    .js-plotly-plot {
+        border-radius: 8px;
+        background: #ffffff;
+    }
+
+    /* Remove default Streamlit styling */
+    .css-18e3th9 {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    /* Nordic color overrides for text */
+    .stMarkdown p {
+        color: #4a5568;
+        line-height: 1.6;
+    }
+
+    /* Section dividers */
+    hr {
+        border: none;
+        height: 1px;
+        background: #e2e8f0;
+        margin: 2rem 0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -228,7 +320,7 @@ def display_provider_analysis(data):
             values=perf_counts.values,
             names=perf_counts.index,
             title="Provider Performance Tiers",
-            color_discrete_sequence=['#27ae60', '#2ecc71', '#f39c12', '#e74c3c']
+            color_discrete_sequence=['#718096', '#a0aec0', '#cbd5e0', '#e2e8f0']
         )
         fig.update_layout(height=400)
         st.plotly_chart(fig, use_container_width=True)
@@ -275,7 +367,7 @@ def display_risk_analysis(data):
             go.Bar(
                 x=[tier['risk_tier'] for tier in risk_data],
                 y=[tier['total_cost_pct'] for tier in risk_data],
-                marker_color=['#e74c3c', '#f39c12', '#27ae60'],
+                marker_color=['#718096', '#a0aec0', '#cbd5e0'],
                 text=[f"{tier['total_cost_pct']:.1f}%" for tier in risk_data],
                 textposition='auto',
             )
@@ -311,7 +403,7 @@ def display_trends(data):
             y='claims',
             title='Monthly Claims Volume',
             markers=True,
-            color_discrete_sequence=['#3498db']
+            color_discrete_sequence=['#718096']
         )
         fig_volume.update_layout(height=400)
         st.plotly_chart(fig_volume, use_container_width=True)
@@ -323,7 +415,7 @@ def display_trends(data):
             y='avg_claim_value',
             title='Average Claim Value Trend',
             markers=True,
-            color_discrete_sequence=['#2ecc71']
+            color_discrete_sequence=['#a0aec0']
         )
         fig_avg_value.update_yaxis(tickformat='$,.0f')
         fig_avg_value.update_layout(height=400)
@@ -337,7 +429,7 @@ def display_trends(data):
             y='denial_rate',
             title='Monthly Denial Rate',
             markers=True,
-            color_discrete_sequence=['#e74c3c']
+            color_discrete_sequence=['#cbd5e0']
         )
         fig_denial.update_yaxis(tickformat='.1%')
         fig_denial.update_layout(height=400)
@@ -350,7 +442,7 @@ def display_trends(data):
             y='reimbursement_rate',
             title='Monthly Reimbursement Rate',
             markers=True,
-            color_discrete_sequence=['#f39c12']
+            color_discrete_sequence=['#a0aec0']
         )
         fig_reimb.update_yaxis(tickformat='.1%')
         fig_reimb.update_layout(height=400)
@@ -405,7 +497,7 @@ def display_claim_type_analysis(data):
             values='count',
             names='claim_type',
             title="Claims Distribution by Type",
-            color_discrete_sequence=['#3498db', '#2ecc71', '#f39c12']
+            color_discrete_sequence=['#718096', '#a0aec0', '#cbd5e0']
         )
         fig_pie.update_layout(height=400)
         st.plotly_chart(fig_pie, use_container_width=True)
@@ -418,7 +510,7 @@ def display_claim_type_analysis(data):
             y='avg_value',
             title="Average Claim Value by Type",
             color='claim_type',
-            color_discrete_sequence=['#3498db', '#2ecc71', '#f39c12']
+            color_discrete_sequence=['#718096', '#a0aec0', '#cbd5e0']
         )
         fig_bar.update_layout(height=400, showlegend=False)
         fig_bar.update_yaxis(tickformat='$,.0f')
@@ -462,7 +554,7 @@ def display_processing_efficiency(data):
             values='count',
             names='category',
             title="Claims by Processing Speed",
-            color_discrete_sequence=['#27ae60', '#2ecc71', '#f39c12', '#e74c3c']
+            color_discrete_sequence=['#718096', '#a0aec0', '#cbd5e0', '#e2e8f0']
         )
         fig_pie.update_layout(height=400)
         st.plotly_chart(fig_pie, use_container_width=True)
@@ -475,7 +567,7 @@ def display_processing_efficiency(data):
             y='denial_rate',
             title="Denial Rate by Processing Speed",
             color='denial_rate',
-            color_continuous_scale='Reds'
+            color_continuous_scale='Greys'
         )
         fig_bar.update_layout(height=400, showlegend=False)
         fig_bar.update_yaxis(tickformat='.1%')
@@ -507,7 +599,7 @@ def display_chronic_conditions_impact(data):
             y='avg_cost',
             title="Average Cost by Chronic Condition Count",
             color='avg_cost',
-            color_continuous_scale='Blues'
+            color_continuous_scale='Greys'
         )
         fig_bar.update_layout(height=400, showlegend=False)
         fig_bar.update_yaxis(tickformat='$,.0f')
