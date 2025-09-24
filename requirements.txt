@@ -22,6 +22,8 @@ pytest-dbt-adapter>=0.6.0
 # Documentation and visualization
 mkdocs>=1.5.0
 mkdocs-material>=9.0.0
+streamlit>=1.28.0
+plotly>=5.15.0
 
 # Utility packages
 pyyaml>=6.0
