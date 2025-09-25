@@ -8,6 +8,8 @@
 [![Documentation](https://img.shields.io/badge/Documentation-Complete-brightgreen.svg)](#documentation)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Analytics](https://img.shields.io/badge/Analytics-Healthcare-blue.svg)](#business-impact)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-FF4B4B.svg)](https://claims-data-warehouse.streamlit.app)
+[![Dashboard](https://img.shields.io/badge/Dashboard-Interactive-purple.svg)](#interactive-streamlit-dashboard)
 
 ## 📋 Project Overview
 
@@ -49,6 +51,8 @@ The Claims Data Warehouse is a production-ready analytics platform designed to p
 | **SQL** | Data transformation language | - |
 | **dbt-expectations** | Advanced data testing | 0.10+ |
 | **Python** | Report generation & analysis | 3.8+ |
+| **Streamlit** | Interactive dashboard & visualization | 1.28+ |
+| **Plotly** | Advanced data visualization | 5.15+ |
 
 ## 📊 Data Models
 
@@ -150,6 +154,43 @@ Our data quality framework implements multiple layers of validation:
 | **Total Coverage** | 70+ tests | Comprehensive validation across all models |
 
 *Note: Run `dbt test` to execute all quality validations and generate current metrics*
+
+## 🖥️ Interactive Streamlit Dashboard
+
+The project includes a comprehensive **Nordic-styled interactive dashboard** built with Streamlit, providing real-time analytics and insights:
+
+### 🎨 Dashboard Features
+
+- **🏥 Executive Summary**: Modern KPI cards with industry benchmarks
+- **📊 Provider Performance**: Interactive charts and provider rankings
+- **👤 Member Risk Analysis**: Risk stratification and chronic condition analysis
+- **⚡ Processing Efficiency**: Operational metrics and processing time analysis
+- **🩺 Chronic Conditions**: Impact analysis of chronic conditions on costs
+- **🛡️ Data Quality**: Comprehensive quality metrics and monitoring
+- **📈 Strategic Recommendations**: AI-powered cost optimization recommendations
+- **🔮 Predictive Analytics**: Forecast models and trend analysis
+
+### 🎯 Key Capabilities
+
+- **Real-time Visualization**: Interactive Plotly charts with drill-down capabilities
+- **Industry Benchmarking**: Compare performance against healthcare industry standards
+- **Responsive Design**: Nordic/Scandinavian design principles with clean aesthetics
+- **Robust Error Handling**: Comprehensive fallback data ensures charts display even without data files
+- **Cloud Deployment**: Optimized for Streamlit Cloud with production-ready configurations
+
+### 🚀 Quick Start Dashboard
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the dashboard locally
+streamlit run streamlit_app.py
+
+# Access at http://localhost:8501
+```
+
+**Live Demo**: [View Dashboard on Streamlit Cloud](https://claims-data-warehouse.streamlit.app)
 
 ## 🚀 Getting Started
 
@@ -347,6 +388,13 @@ The project includes a comprehensive CI/CD framework:
 - **Incremental models** for large datasets
 - **Smart caching** of dimension tables
 - **Parallel processing** for independent model groups
+
+### Streamlit Dashboard Optimization
+- **Robust Error Handling**: Comprehensive fallback data ensures charts display without data files
+- **Safe Data Access**: All data operations use `.get()` methods with fallbacks to prevent crashes
+- **Nordic Design System**: Optimized CSS for fast rendering and professional appearance
+- **Cloud Deployment**: Production-ready configuration for Streamlit Cloud
+- **Performance**: Efficient chart rendering with Plotly and responsive design patterns
 
 ## 🛠️ Monitoring & Alerting
 
