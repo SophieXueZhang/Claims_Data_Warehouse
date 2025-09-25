@@ -24,10 +24,31 @@ st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-    /* Global styling */
+    /* Nordic/Scandinavian Global styling */
     .stApp {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #fafafa;
         font-family: 'Inter', sans-serif;
+        color: #2e3440;
+    }
+
+    /* Nordic color palette */
+    :root {
+        --nord-0: #2e3440;   /* Polar Night - darkest */
+        --nord-1: #3b4252;   /* Polar Night */
+        --nord-2: #434c5e;   /* Polar Night */
+        --nord-3: #4c566a;   /* Polar Night - lightest */
+        --nord-4: #d8dee9;   /* Snow Storm - darkest */
+        --nord-5: #e5e9f0;   /* Snow Storm */
+        --nord-6: #eceff4;   /* Snow Storm - lightest */
+        --nord-7: #8fbcbb;   /* Frost - teal */
+        --nord-8: #88c0d0;   /* Frost - light blue */
+        --nord-9: #81a1c1;   /* Frost - blue */
+        --nord-10: #5e81ac;  /* Frost - dark blue */
+        --nord-11: #bf616a;  /* Aurora - red */
+        --nord-12: #d08770;  /* Aurora - orange */
+        --nord-13: #ebcb8b;  /* Aurora - yellow */
+        --nord-14: #a3be8c;  /* Aurora - green */
+        --nord-15: #b48ead;  /* Aurora - purple */
     }
 
     /* Hide default Streamlit elements */
@@ -35,17 +56,18 @@ st.markdown("""
     footer {visibility: hidden;}
     .stDeployButton {display: none;}
 
-    /* Sidebar styling - Professional dark - Multiple selectors for compatibility */
+    /* Nordic Sidebar styling - Clean and minimal */
     [data-testid="stSidebar"], .css-1d391kg, .css-1aumxhk, .css-17eq0hr {
-        background: #4a5568 !important;
-        border-right: none !important;
-        padding: 2rem 1rem !important;
-        width: 280px !important;
+        background: var(--nord-6) !important;
+        border-right: 1px solid var(--nord-4) !important;
+        padding: 2rem 1.5rem !important;
+        width: 300px !important;
+        box-shadow: 0 0 20px rgba(46, 52, 64, 0.05) !important;
     }
 
-    /* Ensure sidebar content is visible */
+    /* Ensure sidebar content is visible with Nordic colors */
     [data-testid="stSidebar"] > div {
-        color: white !important;
+        color: var(--nord-0) !important;
     }
 
     /* Sidebar navigation items */
@@ -87,62 +109,64 @@ st.markdown("""
         max-width: none !important;
     }
 
-    /* Dashboard header */
+    /* Nordic dashboard header */
     .dashboard-header {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 1rem 2rem;
-        border-radius: 12px;
+        background: var(--nord-6);
+        padding: 2rem;
+        border-radius: 8px;
         margin-bottom: 2rem;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid var(--nord-4);
+        box-shadow: 0 2px 8px rgba(46, 52, 64, 0.06);
     }
 
-    /* KPI cards */
+    /* Nordic KPI cards - Functional and clean */
     .kpi-card {
-        background: rgba(255, 255, 255, 0.95);
+        background: var(--nord-6);
         padding: 1.5rem;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-        transition: all 0.2s ease;
+        border-radius: 6px;
+        border: 1px solid var(--nord-4);
+        box-shadow: 0 1px 4px rgba(46, 52, 64, 0.08);
+        transition: all 0.3s ease;
         margin-bottom: 1rem;
     }
 
     .kpi-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        border-color: var(--nord-8);
+        box-shadow: 0 2px 8px rgba(46, 52, 64, 0.12);
     }
 
     .kpi-value {
         font-size: 2rem;
-        font-weight: 600;
-        color: #1a202c;
+        font-weight: 500;
+        color: var(--nord-0);
         margin-bottom: 0.5rem;
+        letter-spacing: -0.5px;
     }
 
     .kpi-label {
-        color: #4a5568;
-        font-size: 0.9rem;
-        font-weight: 500;
+        color: var(--nord-3);
+        font-size: 0.85rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
-    /* Chart containers */
+    /* Nordic chart containers - Clean and minimal */
     .chart-container {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 1.5rem;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-        margin-bottom: 1rem;
+        background: var(--nord-6);
+        padding: 2rem;
+        border-radius: 8px;
+        border: 1px solid var(--nord-4);
+        box-shadow: 0 2px 8px rgba(46, 52, 64, 0.06);
+        margin-bottom: 1.5rem;
     }
 
     .chart-title {
         font-size: 1.1rem;
-        font-weight: 600;
-        color: #1a202c;
-        margin-bottom: 1rem;
+        font-weight: 500;
+        color: var(--nord-0);
+        margin-bottom: 1.5rem;
+        letter-spacing: 0.3px;
     }
 
     /* Only hide main content buttons, not sidebar buttons */
@@ -150,15 +174,16 @@ st.markdown("""
         display: none !important;
     }
 
-    /* Sidebar title */
+    /* Nordic sidebar title */
     .sidebar-title {
-        color: #ffffff;
-        font-size: 1.4rem;
-        font-weight: 600;
+        color: var(--nord-0);
+        font-size: 1.2rem;
+        font-weight: 500;
         margin-bottom: 2rem;
-        text-align: center;
-        padding: 1rem;
-        border-bottom: 1px solid #2d3748;
+        text-align: left;
+        padding: 0 0 1rem 0;
+        border-bottom: 2px solid var(--nord-4);
+        letter-spacing: 0.5px;
     }
 
     /* Style selectbox but don't hide it */
@@ -167,7 +192,7 @@ st.markdown("""
         font-weight: 500 !important;
     }
 
-    /* Force show sidebar buttons */
+    /* Nordic sidebar buttons - Clean and functional */
     [data-testid="stSidebar"] .stButton {
         display: block !important;
         margin-bottom: 0.5rem !important;
@@ -175,18 +200,28 @@ st.markdown("""
 
     [data-testid="stSidebar"] .stButton > button {
         width: 100% !important;
-        background: rgba(255, 255, 255, 0.1) !important;
-        color: white !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        border-radius: 8px !important;
+        background: transparent !important;
+        color: var(--nord-0) !important;
+        border: 1px solid transparent !important;
+        border-radius: 6px !important;
         padding: 0.75rem 1rem !important;
         text-align: left !important;
-        transition: all 0.2s ease !important;
+        transition: all 0.3s ease !important;
+        font-weight: 400 !important;
+        font-size: 0.9rem !important;
     }
 
     [data-testid="stSidebar"] .stButton > button:hover {
-        background: rgba(255, 255, 255, 0.2) !important;
-        border-color: rgba(255, 255, 255, 0.4) !important;
+        background: var(--nord-5) !important;
+        border-color: var(--nord-4) !important;
+        color: var(--nord-0) !important;
+    }
+
+    /* Active state for Nordic buttons */
+    [data-testid="stSidebar"] .stButton > button:focus {
+        background: var(--nord-8) !important;
+        color: var(--nord-6) !important;
+        border-color: var(--nord-8) !important;
     }
 
     /* Force show sidebar markdown content */
@@ -310,7 +345,7 @@ def display_executive_summary(data):
             df_claims,
             values='count',
             names='claim_type',
-            color_discrete_sequence=['#667eea', '#f093fb', '#4facfe']
+            color_discrete_sequence=['#81a1c1', '#88c0d0', '#8fbcbb']
         )
         fig_claims.update_layout(height=300, margin=dict(t=20, b=20, l=20, r=20))
         st.plotly_chart(fig_claims, use_container_width=True)
@@ -330,7 +365,7 @@ def display_executive_summary(data):
             x='month',
             y='claims',
             markers=True,
-            color_discrete_sequence=['#667eea']
+            color_discrete_sequence=['#5e81ac']
         )
         fig_trends.update_layout(height=300, margin=dict(t=20, b=20, l=20, r=20))
         fig_trends.update_layout(
@@ -510,7 +545,7 @@ def display_provider_analysis(data):
             values=perf_counts.values,
             names=perf_counts.index,
             title="Provider Performance Tiers",
-            color_discrete_sequence=['#718096', '#a0aec0', '#cbd5e0', '#e2e8f0']
+            color_discrete_sequence=['#5e81ac', '#81a1c1', '#88c0d0', '#8fbcbb']
         )
         fig.update_layout(height=400)
         st.plotly_chart(fig, use_container_width=True)
@@ -593,7 +628,7 @@ def display_trends(data):
             y='claims',
             title='Monthly Claims Volume',
             markers=True,
-            color_discrete_sequence=['#718096']
+            color_discrete_sequence=['#5e81ac']
         )
         fig_volume.update_layout(height=400)
         st.plotly_chart(fig_volume, use_container_width=True)
@@ -605,7 +640,7 @@ def display_trends(data):
             y='avg_claim_value',
             title='Average Claim Value Trend',
             markers=True,
-            color_discrete_sequence=['#a0aec0']
+            color_discrete_sequence=['#81a1c1']
         )
         fig_avg_value.update_layout(yaxis_tickformat='$,.0f')
         fig_avg_value.update_layout(height=400)
@@ -619,7 +654,7 @@ def display_trends(data):
             y='denial_rate',
             title='Monthly Denial Rate',
             markers=True,
-            color_discrete_sequence=['#cbd5e0']
+            color_discrete_sequence=['#88c0d0']
         )
         fig_denial.update_layout(yaxis_tickformat='.1%')
         fig_denial.update_layout(height=400)
@@ -632,7 +667,7 @@ def display_trends(data):
             y='reimbursement_rate',
             title='Monthly Reimbursement Rate',
             markers=True,
-            color_discrete_sequence=['#a0aec0']
+            color_discrete_sequence=['#81a1c1']
         )
         fig_reimb.update_layout(yaxis_tickformat='.1%')
         fig_reimb.update_layout(height=400)
@@ -687,7 +722,7 @@ def display_claim_type_analysis(data):
             values='count',
             names='claim_type',
             title="Claims Distribution by Type",
-            color_discrete_sequence=['#718096', '#a0aec0', '#cbd5e0']
+            color_discrete_sequence=['#5e81ac', '#81a1c1', '#88c0d0']
         )
         fig_pie.update_layout(height=400)
         st.plotly_chart(fig_pie, use_container_width=True)
@@ -700,7 +735,7 @@ def display_claim_type_analysis(data):
             y='avg_value',
             title="Average Claim Value by Type",
             color='claim_type',
-            color_discrete_sequence=['#718096', '#a0aec0', '#cbd5e0']
+            color_discrete_sequence=['#5e81ac', '#81a1c1', '#88c0d0']
         )
         fig_bar.update_layout(
             height=400,
@@ -747,7 +782,7 @@ def display_processing_efficiency(data):
             values='count',
             names='category',
             title="Claims by Processing Speed",
-            color_discrete_sequence=['#718096', '#a0aec0', '#cbd5e0', '#e2e8f0']
+            color_discrete_sequence=['#5e81ac', '#81a1c1', '#88c0d0', '#8fbcbb']
         )
         fig_pie.update_layout(height=400)
         st.plotly_chart(fig_pie, use_container_width=True)
@@ -990,8 +1025,8 @@ def render_dashboard_layout(data, page):
     # Header
     st.markdown("""
     <div class="dashboard-header">
-        <h2 style="margin: 0; color: #1a202c; font-weight: 600;">Healthcare Analytics Dashboard</h2>
-        <p style="margin: 0.5rem 0 0 0; color: #4a5568;">Comprehensive claims data insights and KPI monitoring</p>
+        <h2 style="margin: 0; color: var(--nord-0); font-weight: 500;">Healthcare Analytics Dashboard</h2>
+        <p style="margin: 0.5rem 0 0 0; color: var(--nord-3);">Comprehensive claims data insights and KPI monitoring</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1005,7 +1040,7 @@ def render_dashboard_layout(data, page):
         with col1:
             st.markdown(f"""
             <div class="kpi-card">
-                <div class="kpi-value" style="color: #3182ce;">{metrics['total_claims']:,}</div>
+                <div class="kpi-value" style="color: var(--nord-10);">{metrics['total_claims']:,}</div>
                 <div class="kpi-label">Total Claims</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1013,7 +1048,7 @@ def render_dashboard_layout(data, page):
         with col2:
             st.markdown(f"""
             <div class="kpi-card">
-                <div class="kpi-value" style="color: #ed8936;">${metrics['total_claim_value']/1000000:.0f}M</div>
+                <div class="kpi-value" style="color: var(--nord-12);">${metrics['total_claim_value']/1000000:.0f}M</div>
                 <div class="kpi-label">Total Value</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1021,7 +1056,7 @@ def render_dashboard_layout(data, page):
         with col3:
             st.markdown(f"""
             <div class="kpi-card">
-                <div class="kpi-value" style="color: #38a169;">{metrics['overall_denial_rate']:.1%}</div>
+                <div class="kpi-value" style="color: var(--nord-14);">{metrics['overall_denial_rate']:.1%}</div>
                 <div class="kpi-label">Denial Rate</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1029,7 +1064,7 @@ def render_dashboard_layout(data, page):
         with col4:
             st.markdown(f"""
             <div class="kpi-card">
-                <div class="kpi-value" style="color: #805ad5;">{metrics['avg_processing_days']:.1f}</div>
+                <div class="kpi-value" style="color: var(--nord-15);">{metrics['avg_processing_days']:.1f}</div>
                 <div class="kpi-label">Avg Processing Days</div>
             </div>
             """, unsafe_allow_html=True)
