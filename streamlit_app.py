@@ -70,6 +70,16 @@ st.markdown("""
         color: var(--nord-0) !important;
     }
 
+    /* Sidebar text contrast improvements */
+    [data-testid="stSidebar"] * {
+        color: var(--nord-0) !important;
+    }
+
+    [data-testid="stSidebar"] .sidebar-title {
+        color: var(--nord-0) !important;
+        font-weight: 600 !important;
+    }
+
     /* Sidebar navigation items */
     .nav-item {
         display: flex;
@@ -109,9 +119,9 @@ st.markdown("""
         max-width: none !important;
     }
 
-    /* Nordic dashboard header */
+    /* Nordic dashboard header with better contrast */
     .dashboard-header {
-        background: var(--nord-6);
+        background: #ffffff;
         padding: 2rem;
         border-radius: 8px;
         margin-bottom: 2rem;
@@ -119,9 +129,9 @@ st.markdown("""
         box-shadow: 0 2px 8px rgba(46, 52, 64, 0.06);
     }
 
-    /* Nordic KPI cards - Functional and clean */
+    /* Nordic KPI cards - Functional and clean with better contrast */
     .kpi-card {
-        background: var(--nord-6);
+        background: #ffffff;
         padding: 1.5rem;
         border-radius: 6px;
         border: 1px solid var(--nord-4);
@@ -133,6 +143,7 @@ st.markdown("""
     .kpi-card:hover {
         border-color: var(--nord-8);
         box-shadow: 0 2px 8px rgba(46, 52, 64, 0.12);
+        transform: translateY(-1px);
     }
 
     .kpi-value {
@@ -151,9 +162,9 @@ st.markdown("""
         letter-spacing: 0.5px;
     }
 
-    /* Nordic chart containers - Clean and minimal */
+    /* Nordic chart containers - Clean and minimal with better contrast */
     .chart-container {
-        background: var(--nord-6);
+        background: #ffffff;
         padding: 2rem;
         border-radius: 8px;
         border: 1px solid var(--nord-4);
@@ -200,28 +211,31 @@ st.markdown("""
 
     [data-testid="stSidebar"] .stButton > button {
         width: 100% !important;
-        background: transparent !important;
+        background: var(--nord-5) !important;
         color: var(--nord-0) !important;
-        border: 1px solid transparent !important;
+        border: 1px solid var(--nord-4) !important;
         border-radius: 6px !important;
         padding: 0.75rem 1rem !important;
         text-align: left !important;
         transition: all 0.3s ease !important;
-        font-weight: 400 !important;
+        font-weight: 500 !important;
         font-size: 0.9rem !important;
     }
 
     [data-testid="stSidebar"] .stButton > button:hover {
-        background: var(--nord-5) !important;
-        border-color: var(--nord-4) !important;
+        background: var(--nord-4) !important;
+        border-color: var(--nord-3) !important;
         color: var(--nord-0) !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 2px 4px rgba(46, 52, 64, 0.1) !important;
     }
 
     /* Active state for Nordic buttons */
     [data-testid="stSidebar"] .stButton > button:focus {
-        background: var(--nord-8) !important;
+        background: var(--nord-10) !important;
         color: var(--nord-6) !important;
-        border-color: var(--nord-8) !important;
+        border-color: var(--nord-10) !important;
+        box-shadow: 0 0 0 2px rgba(94, 129, 172, 0.2) !important;
     }
 
     /* Force show sidebar markdown content */
