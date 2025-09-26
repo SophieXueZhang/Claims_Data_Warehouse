@@ -203,7 +203,7 @@ st.markdown("""
         font-weight: 500 !important;
     }
 
-    /* Minimalist sidebar buttons - Ultra clean design */
+    /* Minimalist sidebar buttons with SVG support */
     [data-testid="stSidebar"] .stButton {
         display: block !important;
         margin-bottom: 0.25rem !important;
@@ -217,10 +217,13 @@ st.markdown("""
         border-radius: 4px !important;
         padding: 0.6rem 0.8rem !important;
         text-align: left !important;
+        justify-content: flex-start !important;
         transition: all 0.2s ease !important;
         font-weight: 400 !important;
         font-size: 0.85rem !important;
         letter-spacing: 0.01em !important;
+        display: flex !important;
+        align-items: center !important;
     }
 
     [data-testid="stSidebar"] .stButton > button:hover {
@@ -236,6 +239,13 @@ st.markdown("""
         color: var(--nord-0) !important;
         border: none !important;
         box-shadow: inset 3px 0 0 var(--nord-10) !important;
+    }
+
+    /* SVG icon styles */
+    [data-testid="stSidebar"] svg {
+        margin-right: 0.5rem !important;
+        transition: all 0.2s ease !important;
+        flex-shrink: 0 !important;
     }
 
     /* Force show sidebar markdown content */
@@ -1386,29 +1396,22 @@ def render_sidebar():
     """Render custom sidebar navigation"""
     st.sidebar.markdown("""
     <div class="sidebar-title">
-        🏥 DASHBOARD
+        DASHBOARD
     </div>
     """, unsafe_allow_html=True)
 
-    # Navigation items
+    # Navigation items with monochrome Unicode icons - 5 core sections
     nav_items = [
         ("⌂", "Home", "Executive Summary"),
-        ("▣", "Charts", "KPI Dashboard"),
-        ("△", "Forecast", "Predictive Analytics"),
-        ("⬡", "Providers", "Provider Analysis"),
-        ("◉", "Risk", "Risk Analysis"),
-        ("☰", "Claims", "Claim Type Analysis"),
-        ("◈", "Processing", "Processing Efficiency"),
-        ("◎", "Conditions", "Chronic Conditions Impact"),
-        ("▲", "Trends", "Trends & Patterns"),
-        ("◇", "Quality", "Data Quality Framework"),
-        ("◆", "Strategy", "Strategic Recommendations")
+        ("▦", "Analytics", "KPI Dashboard"),
+        ("♦", "Providers", "Provider Analysis"),
+        ("⚠", "Risk", "Risk Analysis"),
+        ("◈", "Strategy", "Strategic Recommendations")
     ]
 
     selected_page = st.session_state.get('selected_page', 'Executive Summary')
 
     for icon, label, page_name in nav_items:
-        active_class = "active" if selected_page == page_name else ""
         if st.sidebar.button(f"{icon} {label}", key=f"nav_{page_name}", use_container_width=True):
             st.session_state.selected_page = page_name
             st.rerun()
