@@ -203,39 +203,39 @@ st.markdown("""
         font-weight: 500 !important;
     }
 
-    /* Nordic sidebar buttons - Clean and functional */
+    /* Minimalist sidebar buttons - Ultra clean design */
     [data-testid="stSidebar"] .stButton {
         display: block !important;
-        margin-bottom: 0.5rem !important;
+        margin-bottom: 0.25rem !important;
     }
 
     [data-testid="stSidebar"] .stButton > button {
         width: 100% !important;
-        background: var(--nord-5) !important;
-        color: var(--nord-0) !important;
-        border: 1px solid var(--nord-4) !important;
-        border-radius: 6px !important;
-        padding: 0.75rem 1rem !important;
+        background: transparent !important;
+        color: var(--nord-3) !important;
+        border: none !important;
+        border-radius: 4px !important;
+        padding: 0.6rem 0.8rem !important;
         text-align: left !important;
-        transition: all 0.3s ease !important;
-        font-weight: 500 !important;
-        font-size: 0.9rem !important;
+        transition: all 0.2s ease !important;
+        font-weight: 400 !important;
+        font-size: 0.85rem !important;
+        letter-spacing: 0.01em !important;
     }
 
     [data-testid="stSidebar"] .stButton > button:hover {
-        background: var(--nord-4) !important;
-        border-color: var(--nord-3) !important;
+        background: var(--nord-5) !important;
         color: var(--nord-0) !important;
-        transform: translateY(-1px) !important;
-        box-shadow: 0 2px 4px rgba(46, 52, 64, 0.1) !important;
+        transform: none !important;
+        box-shadow: none !important;
     }
 
-    /* Active state for Nordic buttons */
+    /* Active state for minimalist buttons */
     [data-testid="stSidebar"] .stButton > button:focus {
-        background: var(--nord-10) !important;
-        color: var(--nord-6) !important;
-        border-color: var(--nord-10) !important;
-        box-shadow: 0 0 0 2px rgba(94, 129, 172, 0.2) !important;
+        background: var(--nord-4) !important;
+        color: var(--nord-0) !important;
+        border: none !important;
+        box-shadow: inset 3px 0 0 var(--nord-10) !important;
     }
 
     /* Force show sidebar markdown content */
@@ -1392,17 +1392,17 @@ def render_sidebar():
 
     # Navigation items
     nav_items = [
-        ("🏠", "Home", "Executive Summary"),
-        ("📊", "Charts", "KPI Dashboard"),
-        ("🔮", "Forecast", "Predictive Analytics"),
-        ("🏥", "Providers", "Provider Analysis"),
-        ("👤", "Risk", "Risk Analysis"),
-        ("📋", "Claims", "Claim Type Analysis"),
-        ("⚡", "Processing", "Processing Efficiency"),
-        ("🩺", "Conditions", "Chronic Conditions Impact"),
-        ("📈", "Trends", "Trends & Patterns"),
-        ("🛡️", "Quality", "Data Quality Framework"),
-        ("🎯", "Strategy", "Strategic Recommendations")
+        ("⌂", "Home", "Executive Summary"),
+        ("▣", "Charts", "KPI Dashboard"),
+        ("△", "Forecast", "Predictive Analytics"),
+        ("⬡", "Providers", "Provider Analysis"),
+        ("◉", "Risk", "Risk Analysis"),
+        ("☰", "Claims", "Claim Type Analysis"),
+        ("◈", "Processing", "Processing Efficiency"),
+        ("◎", "Conditions", "Chronic Conditions Impact"),
+        ("▲", "Trends", "Trends & Patterns"),
+        ("◇", "Quality", "Data Quality Framework"),
+        ("◆", "Strategy", "Strategic Recommendations")
     ]
 
     selected_page = st.session_state.get('selected_page', 'Executive Summary')
