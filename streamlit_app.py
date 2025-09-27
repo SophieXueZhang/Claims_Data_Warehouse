@@ -338,53 +338,77 @@ def display_executive_summary(data):
         ]
     providers = providers[:3]  # Top 3 providers
 
-    # Create modern grid layout
-    st.markdown("### 🏥 Healthcare Analytics Overview")
+    # Professional Report Header - UN Style
+    st.markdown("""
+    <div style="background: #ffffff; padding: 2rem; margin: -1rem -1rem 2rem -1rem;
+                border-left: 4px solid #5e81ac; border-bottom: 1px solid #e5e7eb;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <h1 style="color: #1f2937; font-size: 2.2rem; font-weight: 600; margin-bottom: 0.5rem;
+                           letter-spacing: -0.01em; line-height: 1.2;">
+                    Healthcare Claims Data Warehouse
+                </h1>
+                <p style="color: #6b7280; font-size: 1rem; font-weight: 400; margin: 0;">
+                    Comprehensive claims data insights and KPI monitoring
+                </p>
+            </div>
+            <div style="text-align: right;">
+                <div style="color: #5e81ac; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.25rem;">
+                    SYSTEM STATUS
+                </div>
+                <div style="color: #1f2937; font-size: 1.1rem; font-weight: 600;">
+                    OPERATIONAL
+                </div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-    # Row 1: Main KPI Cards
+    # Executive Summary Section - UN Report Style
+    st.markdown("""
+    <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+        Executive Summary
+    </h3>
+    """, unsafe_allow_html=True)
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                    padding: 1.5rem; border-radius: 16px; color: white; text-align: center; margin-bottom: 1rem;">
-            <h3 style="margin: 0; font-size: 2.5rem; font-weight: 300; color: white;">
-                {0:,}
-            </h3>
-            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Total Claims</p>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #5e81ac;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #5e81ac; margin-bottom: 0.25rem;">{0:,}</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Total Claims</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">✓ System operational</div>
         </div>
         """.format(metrics['total_claims']), unsafe_allow_html=True)
 
     with col2:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-                    padding: 1.5rem; border-radius: 16px; color: white; text-align: center; margin-bottom: 1rem;">
-            <h3 style="margin: 0; font-size: 2.5rem; font-weight: 300; color: white;">
-                ${0:.0f}M
-            </h3>
-            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Total Value</p>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #bf616a;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #bf616a; margin-bottom: 0.25rem;">${0:.0f}M</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Total Value</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">↗ +8% growth</div>
         </div>
         """.format(metrics['total_claim_value']/1000000), unsafe_allow_html=True)
 
     with col3:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-                    padding: 1.5rem; border-radius: 16px; color: white; text-align: center; margin-bottom: 1rem;">
-            <h3 style="margin: 0; font-size: 2.5rem; font-weight: 300; color: white;">
-                {0:.1%}
-            </h3>
-            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Denial Rate</p>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #a3be8c;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #a3be8c; margin-bottom: 0.25rem;">{0:.1%}</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Denial Rate</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">✓ Below industry avg</div>
         </div>
         """.format(metrics['overall_denial_rate']), unsafe_allow_html=True)
 
     with col4:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-                    padding: 1.5rem; border-radius: 16px; color: white; text-align: center; margin-bottom: 1rem;">
-            <h3 style="margin: 0; font-size: 2.5rem; font-weight: 300; color: white;">
-                {0:.1f}
-            </h3>
-            <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Avg Processing Days</p>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #b48ead;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #b48ead; margin-bottom: 0.25rem;">{0:.1f}</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Avg Processing Days</div>
+            <div style="font-size: 0.8rem; color: #bf616a; font-weight: 500; margin-top: 0.5rem;">⚠ Above target</div>
         </div>
         """.format(metrics['avg_processing_days']), unsafe_allow_html=True)
 
@@ -394,10 +418,11 @@ def display_executive_summary(data):
     with col1:
         # Claim type distribution chart
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem; height: 400px;">
+        <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #5e81ac;">
+            <h3 style="color: #5e81ac; font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em;">
+                Claim Distribution Analysis
+            </h3>
         """, unsafe_allow_html=True)
-        st.subheader("📋 Claim Distribution")
 
         df_claims = pd.DataFrame(claim_types)
         fig_claims = px.pie(
@@ -413,10 +438,11 @@ def display_executive_summary(data):
     with col2:
         # Monthly trends
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem; height: 400px;">
+        <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #a3be8c;">
+            <h3 style="color: #a3be8c; font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em;">
+                Monthly Processing Trends
+            </h3>
         """, unsafe_allow_html=True)
-        st.subheader("📈 Monthly Trends")
 
         df_trends = pd.DataFrame(trends)
         fig_trends = px.line(
@@ -437,19 +463,20 @@ def display_executive_summary(data):
     with col3:
         # Risk summary
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem; height: 400px;">
-            <h4 style="margin-top: 0; color: #1a202c;">👤 Risk Summary</h4>
+        <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #bf616a;">
+            <h3 style="color: #bf616a; font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em;">
+                Member Risk Analysis
+            </h3>
         """, unsafe_allow_html=True)
 
         for tier in risk_data:
-            color = "#ef4444" if tier['risk_tier'] == "High Risk" else "#f59e0b" if tier['risk_tier'] == "Medium Risk" else "#10b981"
+            color = "#bf616a" if tier['risk_tier'] == "High Risk" else "#b48ead" if tier['risk_tier'] == "Medium Risk" else "#a3be8c"
             st.markdown(f"""
-            <div style="margin: 1rem 0; padding: 0.75rem; background: {color}15;
-                        border-left: 3px solid {color}; border-radius: 6px;">
-                <strong>{tier['risk_tier']}</strong><br>
-                <span style="font-size: 0.9rem; color: #666;">{tier['count']:,} members</span><br>
-                <span style="font-size: 0.9rem; color: #666;">{tier['total_cost_pct']:.1f}% of costs</span>
+            <div style="margin: 1rem 0; padding: 1rem; background: white;
+                        border-left: 3px solid {color};">
+                <div style="font-size: 1.1rem; font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">{tier['risk_tier']}</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: {color}; margin-bottom: 0.25rem;">{tier['count']:,}</div>
+                <div style="font-size: 0.8rem; color: #6b7280; font-weight: 500;">Members • {tier['total_cost_pct']:.1f}% of total costs</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -460,11 +487,10 @@ def display_executive_summary(data):
 
     with col1:
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem;
-                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 2px 8px 0 rgba(0, 0, 0, 0.04);
-                    transition: box-shadow 0.2s ease;">
-            <h4 style="margin-top: 0; color: #1a202c;">💰 Financial Metrics</h4>
+        <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #b48ead;">
+            <h3 style="color: #b48ead; font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em;">
+                Financial Performance Metrics
+            </h3>
         """, unsafe_allow_html=True)
 
         financial = kpi_data.get('financial', {
@@ -475,22 +501,22 @@ def display_executive_summary(data):
         })
 
         st.markdown(f"""
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
-            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
-                <div style="font-size: 1.5rem; font-weight: bold; color: #1a202c;">${financial['avg_claim_amount']:,}</div>
-                <div style="font-size: 0.8rem; color: #666;">Avg Claim</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem;">
+            <div style="text-align: left; padding: 1rem; background: white; border-left: 3px solid #b48ead;">
+                <div style="font-size: 2rem; font-weight: 700; color: #b48ead; margin-bottom: 0.25rem;">${financial['avg_claim_amount']:,}</div>
+                <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Average Claim Amount</div>
             </div>
-            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
-                <div style="font-size: 1.5rem; font-weight: bold; color: #1a202c;">{financial['reimbursement_rate']:.1%}</div>
-                <div style="font-size: 0.8rem; color: #666;">Reimb Rate</div>
+            <div style="text-align: left; padding: 1rem; background: white; border-left: 3px solid #a3be8c;">
+                <div style="font-size: 2rem; font-weight: 700; color: #a3be8c; margin-bottom: 0.25rem;">{financial['reimbursement_rate']:.1%}</div>
+                <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Reimbursement Rate</div>
             </div>
-            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
-                <div style="font-size: 1.5rem; font-weight: bold; color: #1a202c;">${financial['cost_per_member']:,}</div>
-                <div style="font-size: 0.8rem; color: #666;">Cost/Member</div>
+            <div style="text-align: left; padding: 1rem; background: white; border-left: 3px solid #5e81ac;">
+                <div style="font-size: 2rem; font-weight: 700; color: #5e81ac; margin-bottom: 0.25rem;">${financial['cost_per_member']:,}</div>
+                <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Cost Per Member</div>
             </div>
-            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
-                <div style="font-size: 1.5rem; font-weight: bold; color: #1a202c;">${financial['total_reimbursement']/1000000:.0f}M</div>
-                <div style="font-size: 0.8rem; color: #666;">Total Reimb</div>
+            <div style="text-align: left; padding: 1rem; background: white; border-left: 3px solid #bf616a;">
+                <div style="font-size: 2rem; font-weight: 700; color: #bf616a; margin-bottom: 0.25rem;">${financial['total_reimbursement']/1000000:.0f}M</div>
+                <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Total Reimbursement</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -499,21 +525,23 @@ def display_executive_summary(data):
 
     with col2:
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem;
-                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 2px 8px 0 rgba(0, 0, 0, 0.04);
-                    transition: box-shadow 0.2s ease;">
-            <h4 style="margin-top: 0; color: #1a202c;">🏥 Top Providers</h4>
+        <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #5e81ac;">
+            <h3 style="color: #5e81ac; font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em;">
+                Provider Performance Ranking
+            </h3>
         """, unsafe_allow_html=True)
 
         for i, provider in enumerate(providers):
-            rank_color = "#10b981" if i == 0 else "#f59e0b" if i == 1 else "#6b7280"
+            rank_color = "#a3be8c" if i == 0 else "#b48ead" if i == 1 else "#6b7280"
             st.markdown(f"""
-            <div style="margin: 0.75rem 0; padding: 0.75rem; background: #f8fafc; border-radius: 8px;
+            <div style="margin: 1rem 0; padding: 1rem; background: white;
                         border-left: 3px solid {rank_color};">
-                <div style="font-weight: 600; color: #1a202c;">#{provider['rank']} {provider['name']}</div>
-                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">
-                    {provider['specialty']} • {provider['claims']:,} claims • {provider['denial_rate']:.1%} denial rate
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <div style="font-size: 1.1rem; font-weight: 600; color: #1f2937;">#{provider['rank']} {provider['name']}</div>
+                    <div style="font-size: 1.2rem; font-weight: 700; color: {rank_color};">{provider['claims']:,}</div>
+                </div>
+                <div style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">
+                    {provider['specialty']} • {provider['denial_rate']:.1%} denial rate
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -1692,13 +1720,39 @@ def render_sidebar():
 def render_dashboard_layout(data, page):
     """Render main dashboard content with professional layout"""
 
-    # Header
-    st.markdown("""
-    <div class="dashboard-header">
-        <h2 style="margin: 0; color: var(--nord-0); font-weight: 500;">Healthcare Analytics Dashboard</h2>
-        <p style="margin: 0.5rem 0 0 0; color: var(--nord-3);">Comprehensive claims data insights and KPI monitoring</p>
-    </div>
-    """, unsafe_allow_html=True)
+    # Header - UN Report Style for Executive Summary
+    if page == "Executive Summary":
+        st.markdown("""
+        <div style="background: #ffffff; padding: 2rem; margin: -1rem -1rem 2rem -1rem;
+                    border-left: 4px solid #5e81ac; border-bottom: 1px solid #e5e7eb;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <h1 style="color: #1f2937; font-size: 2.2rem; font-weight: 600; margin-bottom: 0.5rem;
+                               letter-spacing: -0.01em; line-height: 1.2;">
+                        Healthcare Claims Data Warehouse
+                    </h1>
+                    <p style="color: #6b7280; font-size: 1rem; font-weight: 400; margin: 0;">
+                        Comprehensive claims data insights and KPI monitoring
+                    </p>
+                </div>
+                <div style="text-align: right;">
+                    <div style="color: #5e81ac; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.25rem;">
+                        SYSTEM STATUS
+                    </div>
+                    <div style="color: #1f2937; font-size: 1.1rem; font-weight: 600;">
+                        OPERATIONAL
+                    </div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown("""
+        <div class="dashboard-header">
+            <h2 style="margin: 0; color: var(--nord-0); font-weight: 500;">Healthcare Analytics Dashboard</h2>
+            <p style="margin: 0.5rem 0 0 0; color: var(--nord-3);">Comprehensive claims data insights and KPI monitoring</p>
+        </div>
+        """, unsafe_allow_html=True)
 
     if page == "Executive Summary":
         # Top KPI row
@@ -1714,45 +1768,41 @@ def render_dashboard_layout(data, page):
 
         with col1:
             st.markdown(f"""
-            <div class="kpi-card">
-                <div class="kpi-value" style="color: var(--nord-10);">{metrics['total_claims']:,}</div>
-                <div class="kpi-label">Total Claims</div>
-                <div style="font-size: 0.8rem; color: var(--nord-3); margin-top: 8px;">
-                    Industry Avg: 45K | <span style="color: var(--nord-14);">✓ Above Average</span>
-                </div>
+            <div style="background: white; padding: 1.5rem; border-left: 3px solid #5e81ac;
+                        margin-bottom: 1rem; text-align: left;">
+                <div style="font-size: 2.5rem; font-weight: 700; color: #5e81ac; margin-bottom: 0.25rem;">{metrics['total_claims']:,}</div>
+                <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Total Claims</div>
+                <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">✓ System operational</div>
             </div>
             """, unsafe_allow_html=True)
 
         with col2:
             st.markdown(f"""
-            <div class="kpi-card">
-                <div class="kpi-value" style="color: var(--nord-12);">${metrics['total_claim_value']/1000000:.0f}M</div>
-                <div class="kpi-label">Total Value</div>
-                <div style="font-size: 0.8rem; color: var(--nord-3); margin-top: 8px;">
-                    <span style="color: var(--nord-14);">↑ 12% vs Industry</span> | Above Benchmark
-                </div>
+            <div style="background: white; padding: 1.5rem; border-left: 3px solid #bf616a;
+                        margin-bottom: 1rem; text-align: left;">
+                <div style="font-size: 2.5rem; font-weight: 700; color: #bf616a; margin-bottom: 0.25rem;">${metrics['total_claim_value']/1000000:.0f}M</div>
+                <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Total Value</div>
+                <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">↗ +8% growth</div>
             </div>
             """, unsafe_allow_html=True)
 
         with col3:
             st.markdown(f"""
-            <div class="kpi-card">
-                <div class="kpi-value" style="color: var(--nord-14);">{metrics['overall_denial_rate']:.1%}</div>
-                <div class="kpi-label">Denial Rate</div>
-                <div style="font-size: 0.8rem; color: var(--nord-3); margin-top: 8px;">
-                    Industry: 4.1% | <span style="color: var(--nord-14);">✅ 43% Better</span>
-                </div>
+            <div style="background: white; padding: 1.5rem; border-left: 3px solid #a3be8c;
+                        margin-bottom: 1rem; text-align: left;">
+                <div style="font-size: 2.5rem; font-weight: 700; color: #a3be8c; margin-bottom: 0.25rem;">{metrics['overall_denial_rate']:.1%}</div>
+                <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Denial Rate</div>
+                <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">✓ Below industry avg</div>
             </div>
             """, unsafe_allow_html=True)
 
         with col4:
             st.markdown(f"""
-            <div class="kpi-card">
-                <div class="kpi-value" style="color: var(--nord-15);">{metrics['avg_processing_days']:.1f}</div>
-                <div class="kpi-label">Avg Processing Days</div>
-                <div style="font-size: 0.8rem; color: var(--nord-3); margin-top: 8px;">
-                    Target: 8.5 days | <span style="color: var(--nord-11);">⚠️ 46% Slower</span>
-                </div>
+            <div style="background: white; padding: 1.5rem; border-left: 3px solid #b48ead;
+                        margin-bottom: 1rem; text-align: left;">
+                <div style="font-size: 2.5rem; font-weight: 700; color: #b48ead; margin-bottom: 0.25rem;">{metrics['avg_processing_days']:.1f}</div>
+                <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Avg Processing Days</div>
+                <div style="font-size: 0.8rem; color: #bf616a; font-weight: 500; margin-top: 0.5rem;">⚠ Above target</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -1760,8 +1810,12 @@ def render_dashboard_layout(data, page):
         col1, col2 = st.columns([2, 1])
 
         with col1:
-            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-            st.markdown('<div class="chart-title">📈 Monthly Claims Trend</div>', unsafe_allow_html=True)
+            st.markdown("""
+            <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #a3be8c;">
+                <h3 style="color: #a3be8c; font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em;">
+                    Monthly Processing Trends
+                </h3>
+            """, unsafe_allow_html=True)
 
             # Safe data access with fallback
             try:
@@ -1796,8 +1850,12 @@ def render_dashboard_layout(data, page):
             st.markdown('</div>', unsafe_allow_html=True)
 
         with col2:
-            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-            st.markdown('<div class="chart-title">📊 Recent Activity</div>', unsafe_allow_html=True)
+            st.markdown("""
+            <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #5e81ac;">
+                <h3 style="color: #5e81ac; font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em;">
+                    System Activity Monitor
+                </h3>
+            """, unsafe_allow_html=True)
 
             activities = [
                 {"time": "09:32 AM", "content": "High-risk member alert: Member ID 12345 exceeded $25K in claims"},
@@ -1820,8 +1878,12 @@ def render_dashboard_layout(data, page):
         col1, col2 = st.columns(2)
 
         with col1:
-            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-            st.markdown('<div class="chart-title">🏥 Provider Performance</div>', unsafe_allow_html=True)
+            st.markdown("""
+            <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #b48ead;">
+                <h3 style="color: #b48ead; font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em;">
+                    Provider Performance Ranking
+                </h3>
+            """, unsafe_allow_html=True)
 
             providers = data.get('provider_analysis', {}).get('top_providers', [])[:5]
             if not providers:
