@@ -616,55 +616,12 @@ def display_kpi_dashboard(data):
     </div>
     """, unsafe_allow_html=True)
 
-    # Key Performance Indicators Grid
+    # Key Performance Indicators Grid - Dynamic Data
     st.markdown("""
     <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
         Key Performance Indicators
     </h3>
     """, unsafe_allow_html=True)
-
-    col1, col2, col3, col4 = st.columns(4)
-
-    with col1:
-        st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-left: 3px solid #3b82f6;
-                    margin-bottom: 1rem; text-align: left;">
-            <div style="font-size: 2.5rem; font-weight: 700; color: #3b82f6; margin-bottom: 0.25rem;">$9.7K</div>
-            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Average Claim Amount</div>
-            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">↗ +12% vs Q3</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col2:
-        st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-left: 3px solid #dc2626;
-                    margin-bottom: 1rem; text-align: left;">
-            <div style="font-size: 2.5rem; font-weight: 700; color: #bf616a; margin-bottom: 0.25rem;">12.4</div>
-            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Processing Days</div>
-            <div style="font-size: 0.8rem; color: #bf616a; font-weight: 500; margin-top: 0.5rem;">⚠ 46% above target</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col3:
-        st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-left: 3px solid #059669;
-                    margin-bottom: 1rem; text-align: left;">
-            <div style="font-size: 2.5rem; font-weight: 700; color: #a3be8c; margin-bottom: 0.25rem;">2.3%</div>
-            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Denial Rate</div>
-            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">✓ Industry leading</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col4:
-        st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-left: 3px solid #7c3aed;
-                    margin-bottom: 1rem; text-align: left;">
-            <div style="font-size: 2.5rem; font-weight: 700; color: #b48ead; margin-bottom: 0.25rem;">5.0</div>
-            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Claims Per Member</div>
-            <div style="font-size: 0.8rem; color: #b48ead; font-weight: 500; margin-top: 0.5rem;">↔ Stable utilization</div>
-        </div>
-        </div>
-        """, unsafe_allow_html=True)
 
     kpi_data = data.get('executive_summary', {}).get('kpi_categories', {})
     if not kpi_data:
@@ -803,7 +760,7 @@ def display_kpi_dashboard(data):
                 </div>
             </div>
             <div style="text-align: center;">
-                <div style="width: 120px; height: 120px; background: #b48ead; color: white; border-radius: 50%;"
+                <div style="width: 120px; height: 120px; background: #b48ead; color: white; border-radius: 50%;
                             display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto;">
                     <div>
                         <div style="font-size: 1.6rem; font-weight: bold;">$11.1M</div>
