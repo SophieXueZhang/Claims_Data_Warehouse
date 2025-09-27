@@ -795,7 +795,7 @@ def display_kpi_dashboard(data):
         st.metric(
             label="Quality Score",
             value="83/100",
-            delta="↗️ +5 pts",
+            delta="+5 pts",
             help="Overall operational health score"
         )
 
@@ -803,7 +803,7 @@ def display_kpi_dashboard(data):
         st.metric(
             label="Cost Efficiency",
             value="92%",
-            delta="↗️ +3%",
+            delta="+3%",
             help="Cost per member vs industry benchmark"
         )
 
@@ -811,7 +811,7 @@ def display_kpi_dashboard(data):
         st.metric(
             label="Processing SLA",
             value="54%",
-            delta="↘️ -12%",
+            delta="-12%",
             help="Claims processed within target timeframe",
             delta_color="inverse"
         )
@@ -820,7 +820,7 @@ def display_kpi_dashboard(data):
         st.metric(
             label="Member Satisfaction",
             value="4.2/5",
-            delta="↗️ +0.3",
+            delta="+0.3",
             help="Member satisfaction survey results"
         )
 
