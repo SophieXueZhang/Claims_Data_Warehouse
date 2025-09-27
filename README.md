@@ -5,7 +5,6 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-FF4B4B.svg)](https://claims-data-warehouse.streamlit.app)
 [![dbt](https://img.shields.io/badge/dbt-1.6+-orange.svg)](https://www.getdbt.com/)
 [![SQL](https://img.shields.io/badge/SQL-PostgreSQL-blue.svg)](https://www.postgresql.org/)
-[![Dashboard](https://img.shields.io/badge/Dashboard-UN%20Report%20Style-purple.svg)](#dashboard-preview)
 
 ## 📊 Dashboard Preview
 
