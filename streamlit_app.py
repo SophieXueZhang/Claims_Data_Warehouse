@@ -825,32 +825,94 @@ def display_kpi_dashboard(data):
         )
 
 def display_provider_analysis(data):
-    """Display provider performance analysis"""
-    st.header("🏥 Provider Performance Analysis")
+    """Display provider performance analysis in UN report style"""
+    # UN Report Style Header
+    st.markdown("""
+    <div style="background: white; padding: 2rem; border-left: 4px solid #5e81ac; margin-bottom: 2rem;">
+        <h1 style="color: #1f2937; font-size: 2.5rem; font-weight: 700; margin: 0 0 0.5rem 0; text-align: left;">
+            🏥 PROVIDER PERFORMANCE ANALYSIS
+        </h1>
+        <p style="color: #6b7280; font-size: 1.1rem; margin: 0; text-align: left;">
+            Healthcare Network Quality Assessment & Provider Rankings
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
+    # Key Provider Metrics - UN Style Cards
+    st.markdown("""
+    <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+        Provider Network Overview
+    </h3>
+    """, unsafe_allow_html=True)
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #5e81ac;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #5e81ac; margin-bottom: 0.25rem;">1,234</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">TOTAL PROVIDERS</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">Contracted Network</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #a3be8c;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #a3be8c; margin-bottom: 0.25rem;">97.2%</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">QUALITY SCORE</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">Network Average</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #d08770;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #d08770; margin-bottom: 0.25rem;">$9.7K</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">AVG CLAIM AMOUNT</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">Per Provider</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col4:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #b48ead;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #b48ead; margin-bottom: 0.25rem;">2.1%</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">DENIAL RATE</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">Below Benchmark</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # Provider Performance Table - UN Style
     providers = data.get('provider_analysis', {}).get('top_providers', [])
     if not providers:
         providers = [
-            {'name': 'Metro Hospital', 'specialty': 'Cardiology', 'claims': 234, 'avg_amount': 5678},
-            {'name': 'Central Clinic', 'specialty': 'Primary Care', 'claims': 187, 'avg_amount': 3456},
-            {'name': 'West Medical', 'specialty': 'Orthopedics', 'claims': 156, 'avg_amount': 6789},
-            {'name': 'East Surgery', 'specialty': 'Surgery', 'claims': 143, 'avg_amount': 8901},
-            {'name': 'North Wellness', 'specialty': 'Wellness', 'claims': 128, 'avg_amount': 2345}
+            {'rank': 1, 'name': 'Metro Hospital', 'specialty': 'Cardiology', 'claims': 234, 'avg_amount': 5678, 'denial_rate': 0.015, 'performance_tier': 'Elite'},
+            {'rank': 2, 'name': 'Central Clinic', 'specialty': 'Primary Care', 'claims': 187, 'avg_amount': 3456, 'denial_rate': 0.018, 'performance_tier': 'High'},
+            {'rank': 3, 'name': 'West Medical', 'specialty': 'Orthopedics', 'claims': 156, 'avg_amount': 6789, 'denial_rate': 0.021, 'performance_tier': 'High'},
+            {'rank': 4, 'name': 'East Surgery', 'specialty': 'Surgery', 'claims': 143, 'avg_amount': 8901, 'denial_rate': 0.024, 'performance_tier': 'Standard'},
+            {'rank': 5, 'name': 'North Wellness', 'specialty': 'Wellness', 'claims': 128, 'avg_amount': 2345, 'denial_rate': 0.019, 'performance_tier': 'High'}
         ]
 
-    # Convert to DataFrame for better visualization
     df_providers = pd.DataFrame(providers)
 
-    col1, col2 = st.columns([2, 1])
+    col1, col2 = st.columns([3, 1])
 
     with col1:
-        # Provider performance table
-        st.subheader("Top Performing Providers")
+        st.markdown("""
+        <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+            Top Provider Performance Rankings
+        </h3>
+        """, unsafe_allow_html=True)
 
         # Format the data for display
         display_df = df_providers.copy()
         display_df['avg_amount'] = display_df['avg_amount'].apply(lambda x: f"${x:,}")
-        display_df['denial_rate'] = display_df['denial_rate'].apply(lambda x: f"{x:.2%}")
+        display_df['denial_rate'] = display_df['denial_rate'].apply(lambda x: f"{x:.1%}")
 
         st.dataframe(
             display_df[['rank', 'name', 'specialty', 'claims', 'avg_amount', 'denial_rate', 'performance_tier']],
@@ -858,7 +920,7 @@ def display_provider_analysis(data):
                 'rank': 'Rank',
                 'name': 'Provider Name',
                 'specialty': 'Specialty',
-                'claims': 'Claims',
+                'claims': 'Claims Volume',
                 'avg_amount': 'Avg Amount',
                 'denial_rate': 'Denial Rate',
                 'performance_tier': 'Performance Tier'
@@ -868,41 +930,177 @@ def display_provider_analysis(data):
         )
 
     with col2:
-        # Performance tier distribution
-        st.subheader("Performance Distribution")
+        st.markdown("""
+        <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+            Performance Tiers
+        </h3>
+        """, unsafe_allow_html=True)
 
+        # Performance tier distribution with UN colors
         perf_counts = df_providers['performance_tier'].value_counts()
 
         fig = px.pie(
             values=perf_counts.values,
             names=perf_counts.index,
-            title="Provider Performance Tiers",
-            color_discrete_sequence=['#5e81ac', '#81a1c1', '#88c0d0', '#8fbcbb']
+            color_discrete_sequence=['#5e81ac', '#a3be8c', '#d08770', '#b48ead']
         )
-        fig.update_layout(height=400)
+        fig.update_layout(
+            height=350,
+            showlegend=True,
+            font=dict(color='#1f2937'),
+            plot_bgcolor='rgba(0,0,0,0)',
+            paper_bgcolor='rgba(0,0,0,0)'
+        )
+        fig.update_traces(textposition='inside', textinfo='percent+label')
         st.plotly_chart(fig, use_container_width=True)
 
-def display_risk_analysis(data):
-    """Display member risk stratification"""
-    st.header("👤 Member Risk Analysis")
+    # Provider Quality Analysis - UN Style Section
+    st.markdown("""
+    <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 3rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+        Provider Network Quality Assessment
+    </h3>
+    """, unsafe_allow_html=True)
 
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #5e81ac; margin-bottom: 1rem;">
+            <h4 style="color: #5e81ac; font-size: 1.1rem; margin: 0 0 1rem 0; text-transform: uppercase;">
+                Elite Providers
+            </h4>
+            <div style="font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">20%</div>
+            <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">
+                Handle 60% of total volume with exceptional outcomes
+            </div>
+            <div style="color: #a3be8c; font-size: 0.8rem; font-weight: 500;">
+                ✓ <1.5% denial rate<br>
+                ✓ >95% satisfaction<br>
+                ✓ Fast processing
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #a3be8c; margin-bottom: 1rem;">
+            <h4 style="color: #a3be8c; font-size: 1.1rem; margin: 0 0 1rem 0; text-transform: uppercase;">
+                High Performers
+            </h4>
+            <div style="font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">60%</div>
+            <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">
+                Standard network providers meeting quality benchmarks
+            </div>
+            <div style="color: #a3be8c; font-size: 0.8rem; font-weight: 500;">
+                ✓ 1.5-3% denial rate<br>
+                ✓ >90% satisfaction<br>
+                ✓ Standard processing
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #d08770; margin-bottom: 1rem;">
+            <h4 style="color: #d08770; font-size: 1.1rem; margin: 0 0 1rem 0; text-transform: uppercase;">
+                Improvement Needed
+            </h4>
+            <div style="font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">20%</div>
+            <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">
+                Providers requiring quality enhancement programs
+            </div>
+            <div style="color: #d08770; font-size: 0.8rem; font-weight: 500;">
+                ⚠ >3% denial rate<br>
+                ⚠ <90% satisfaction<br>
+                ⚠ Training required
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+def display_risk_analysis(data):
+    """Display member risk stratification in UN report style"""
+    # UN Report Style Header
+    st.markdown("""
+    <div style="background: white; padding: 2rem; border-left: 4px solid #bf616a; margin-bottom: 2rem;">
+        <h1 style="color: #1f2937; font-size: 2.5rem; font-weight: 700; margin: 0 0 0.5rem 0; text-align: left;">
+            👤 MEMBER RISK ANALYSIS
+        </h1>
+        <p style="color: #6b7280; font-size: 1.1rem; margin: 0; text-align: left;">
+            Population Health Risk Stratification & Cost Concentration Analysis
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Risk Overview Metrics - UN Style Cards
+    st.markdown("""
+    <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+        Risk Profile Overview
+    </h3>
+    """, unsafe_allow_html=True)
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #bf616a;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #bf616a; margin-bottom: 0.25rem;">5,000</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">TOTAL MEMBERS</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">Active Population</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #d08770;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #d08770; margin-bottom: 0.25rem;">425</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">HIGH RISK</div>
+            <div style="font-size: 0.8rem; color: #d08770; font-weight: 500; margin-top: 0.5rem;">8.5% Population</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #ebcb8b;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #d08770; margin-bottom: 0.25rem;">48.5%</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">COST CONCENTRATION</div>
+            <div style="font-size: 0.8rem; color: #d08770; font-weight: 500; margin-top: 0.5rem;">High Risk Members</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col4:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #a3be8c;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #a3be8c; margin-bottom: 0.25rem;">$12.5K</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">AVG HIGH RISK COST</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">Per Member</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # Risk Stratification Data
     risk_data = data.get('member_risk_analysis', {}).get('risk_stratification', [])
     if not risk_data:
         risk_data = [
-            {'tier': 'High Risk', 'members': 425, 'cost_share': 0.485, 'avg_cost': 12500},
-            {'tier': 'Medium Risk', 'members': 1567, 'cost_share': 0.324, 'avg_cost': 6200},
-            {'tier': 'Low Risk', 'members': 3008, 'cost_share': 0.191, 'avg_cost': 1800}
+            {'risk_tier': 'High Risk', 'count': 425, 'percentage': 8.5, 'avg_cost': 12500, 'total_cost_pct': 48.5, 'needs_case_management': 'Yes'},
+            {'risk_tier': 'Medium Risk', 'count': 1567, 'percentage': 31.3, 'avg_cost': 6200, 'total_cost_pct': 32.4, 'needs_case_management': 'Selective'},
+            {'risk_tier': 'Low Risk', 'count': 3008, 'percentage': 60.2, 'avg_cost': 1800, 'total_cost_pct': 19.1, 'needs_case_management': 'No'}
         ]
 
-    col1, col2 = st.columns(2)
+    df_risk = pd.DataFrame(risk_data)
+
+    col1, col2 = st.columns([3, 2])
 
     with col1:
-        # Risk distribution table
-        st.subheader("Risk Stratification")
+        st.markdown("""
+        <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+            Risk Stratification Analysis
+        </h3>
+        """, unsafe_allow_html=True)
 
-        df_risk = pd.DataFrame(risk_data)
-
-        # Format for display
+        # Format the data for display
         display_risk = df_risk.copy()
         display_risk['avg_cost'] = display_risk['avg_cost'].apply(lambda x: f"${x:,}")
         display_risk['percentage'] = display_risk['percentage'].apply(lambda x: f"{x:.1f}%")
@@ -913,9 +1111,9 @@ def display_risk_analysis(data):
             column_config={
                 'risk_tier': 'Risk Tier',
                 'count': 'Member Count',
-                'percentage': 'Percentage',
+                'percentage': 'Population %',
                 'avg_cost': 'Avg Cost',
-                'total_cost_pct': 'Cost Share',
+                'total_cost_pct': 'Cost Share %',
                 'needs_case_management': 'Case Management'
             },
             hide_index=True,
@@ -923,27 +1121,100 @@ def display_risk_analysis(data):
         )
 
     with col2:
-        # Risk visualization
-        st.subheader("Cost Concentration")
+        st.markdown("""
+        <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+            Cost Distribution
+        </h3>
+        """, unsafe_allow_html=True)
 
+        # Risk visualization with UN colors
         fig = go.Figure(data=[
             go.Bar(
                 x=[tier['risk_tier'] for tier in risk_data],
                 y=[tier['total_cost_pct'] for tier in risk_data],
-                marker_color=['#718096', '#a0aec0', '#cbd5e0'],
+                marker_color=['#bf616a', '#d08770', '#a3be8c'],
                 text=[f"{tier['total_cost_pct']:.1f}%" for tier in risk_data],
                 textposition='auto',
             )
         ])
 
         fig.update_layout(
-            title="Healthcare Cost Distribution by Risk Tier",
             xaxis_title="Risk Tier",
-            yaxis_title="Percentage of Total Costs",
-            height=400
+            yaxis_title="Cost Share (%)",
+            height=350,
+            font=dict(color='#1f2937'),
+            plot_bgcolor='rgba(0,0,0,0)',
+            paper_bgcolor='rgba(0,0,0,0)',
+            showlegend=False
         )
 
         st.plotly_chart(fig, use_container_width=True)
+
+    # Risk Management Strategies - UN Style Section
+    st.markdown("""
+    <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 3rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+        Risk Management Strategy Framework
+    </h3>
+    """, unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #bf616a; margin-bottom: 1rem;">
+            <h4 style="color: #bf616a; font-size: 1.1rem; margin: 0 0 1rem 0; text-transform: uppercase;">
+                High Risk Management
+            </h4>
+            <div style="font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">425</div>
+            <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">
+                Members requiring intensive case management
+            </div>
+            <div style="color: #bf616a; font-size: 0.8rem; font-weight: 500;">
+                ⚠ Chronic conditions<br>
+                ⚠ Multiple specialists<br>
+                ⚠ High utilization<br>
+                ⚠ Care coordination
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #d08770; margin-bottom: 1rem;">
+            <h4 style="color: #d08770; font-size: 1.1rem; margin: 0 0 1rem 0; text-transform: uppercase;">
+                Medium Risk Monitoring
+            </h4>
+            <div style="font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">1,567</div>
+            <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">
+                Members with selective intervention needs
+            </div>
+            <div style="color: #d08770; font-size: 0.8rem; font-weight: 500;">
+                ⚡ Preventive care<br>
+                ⚡ Health coaching<br>
+                ⚡ Risk monitoring<br>
+                ⚡ Early intervention
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #a3be8c; margin-bottom: 1rem;">
+            <h4 style="color: #a3be8c; font-size: 1.1rem; margin: 0 0 1rem 0; text-transform: uppercase;">
+                Low Risk Maintenance
+            </h4>
+            <div style="font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">3,008</div>
+            <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">
+                Healthy members requiring routine care
+            </div>
+            <div style="color: #a3be8c; font-size: 0.8rem; font-weight: 500;">
+                ✓ Wellness programs<br>
+                ✓ Annual checkups<br>
+                ✓ Risk prevention<br>
+                ✓ Health education
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 def display_trends(data):
     """Display trend analysis"""
@@ -1485,161 +1756,255 @@ def display_predictive_analytics(data):
     """, unsafe_allow_html=True)
 
 def display_recommendations(data):
-    """Display strategic recommendations with ROI analysis"""
-    st.header("🎯 Strategic Recommendations & Implementation Roadmap")
+    """Display strategic recommendations in UN report style"""
+    # UN Report Style Header
+    st.markdown("""
+    <div style="background: white; padding: 2rem; border-left: 4px solid #d08770; margin-bottom: 2rem;">
+        <h1 style="color: #1f2937; font-size: 2.5rem; font-weight: 700; margin: 0 0 0.5rem 0; text-align: left;">
+            🎯 STRATEGIC RECOMMENDATIONS
+        </h1>
+        <p style="color: #6b7280; font-size: 1.1rem; margin: 0; text-align: left;">
+            Implementation Roadmap & ROI Analysis for Healthcare Operations Optimization
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    # Overall Impact Summary
+    # Executive Summary Cards - UN Style
+    st.markdown("""
+    <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+        Strategic Impact Summary
+    </h3>
+    """, unsafe_allow_html=True)
+
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
         st.markdown("""
-        <div class="kpi-card">
-            <div class="kpi-value" style="color: var(--nord-14);">$14.3M</div>
-            <div class="kpi-label">Total Annual Savings</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #a3be8c;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #a3be8c; margin-bottom: 0.25rem;">$14.3M</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">TOTAL ANNUAL SAVINGS</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">Projected ROI</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col2:
         st.markdown("""
-        <div class="kpi-card">
-            <div class="kpi-value" style="color: var(--nord-12);">$2.5M</div>
-            <div class="kpi-label">Total Investment</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #d08770;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #d08770; margin-bottom: 0.25rem;">$2.5M</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">TOTAL INVESTMENT</div>
+            <div style="font-size: 0.8rem; color: #d08770; font-weight: 500; margin-top: 0.5rem;">Implementation Cost</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col3:
         st.markdown("""
-        <div class="kpi-card">
-            <div class="kpi-value" style="color: var(--nord-11);">572%</div>
-            <div class="kpi-label">3-Year ROI</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #5e81ac;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #5e81ac; margin-bottom: 0.25rem;">572%</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">3-YEAR ROI</div>
+            <div style="font-size: 0.8rem; color: #5e81ac; font-weight: 500; margin-top: 0.5rem;">Return Rate</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col4:
         st.markdown("""
-        <div class="kpi-card">
-            <div class="kpi-value" style="color: var(--nord-15);">8.2</div>
-            <div class="kpi-label">Payback Months</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #b48ead;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #b48ead; margin-bottom: 0.25rem;">8.2</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">PAYBACK MONTHS</div>
+            <div style="font-size: 0.8rem; color: #b48ead; font-weight: 500; margin-top: 0.5rem;">Break-even Time</div>
         </div>
         """, unsafe_allow_html=True)
 
-    st.markdown("---")
-
-    # Priority 1: Immediate Actions
-    st.subheader("🚨 Priority 1: Immediate Actions (0-90 Days)")
-
-    # Processing Efficiency Automation
+    # Priority 1: Immediate Actions - UN Style
     st.markdown("""
-    <div style="background: linear-gradient(90deg, #fdebeb 0%, #ffffff 100%); border-left: 4px solid #e74c3c; padding: 20px; border-radius: 8px; margin: 15px 0;">
-        <h4 style="color: #c0392b; margin: 0 0 15px 0;">🚨 Processing Efficiency Automation</h4>
-        <p><strong>Objective:</strong> Reduce average processing time from 12.4 to 8.5 days through AI-powered pre-authorization system</p>
+    <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 3rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+        Priority 1: Immediate Actions (0-90 Days)
+    </h3>
+    """, unsafe_allow_html=True)
+
+    # Processing Efficiency Initiative
+    st.markdown("""
+    <div style="background: white; padding: 1.5rem; border-left: 3px solid #bf616a; margin-bottom: 2rem;">
+        <h4 style="color: #bf616a; font-size: 1.2rem; margin: 0 0 1rem 0; text-transform: uppercase;">
+            🚨 Processing Efficiency Automation
+        </h4>
+        <div style="color: #1f2937; font-size: 1rem; margin-bottom: 1rem; font-weight: 500;">
+            Reduce average processing time from 12.4 to 8.5 days through AI-powered pre-authorization system
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Create ROI breakdown
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.markdown("**💰 Investment:** $850K")
-        st.markdown("**⏱️ Timeline:** 90 Days")
-    with col2:
-        st.markdown("**💵 Annual Savings:** $3.2M")
-        st.markdown("**📈 ROI:** 376%")
-    with col3:
-        st.markdown("**🎯 Success Metrics:**")
-        st.markdown("• Processing time ≤8.5 days")
-        st.markdown("• Automation rate ≥65%")
+        st.markdown("""
+        <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">$850K</div>
+            <div style="font-size: 0.9rem; color: #6b7280; font-weight: 600;">INVESTMENT</div>
+            <div style="font-size: 0.8rem; color: #6b7280; margin-top: 0.5rem;">90 Days Timeline</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    # Implementation Plan
-    with st.expander("📋 Implementation Plan"):
-        st.markdown("**Phase 1 (Days 1-30):** Vendor selection and system design")
-        st.markdown("**Phase 2 (Days 31-60):** Integration with existing claims system")
-        st.markdown("**Phase 3 (Days 61-90):** Testing, training, and rollout to 50% of routine claims")
+    with col2:
+        st.markdown("""
+        <div style="background: #f0f9ff; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">$3.2M</div>
+            <div style="font-size: 0.9rem; color: #6b7280; font-weight: 600;">ANNUAL SAVINGS</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; margin-top: 0.5rem; font-weight: 500;">376% ROI</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div style="background: #f7fee7; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; margin-bottom: 0.5rem;">SUCCESS METRICS</div>
+            <div style="font-size: 0.8rem; color: #6b7280;">
+                • Processing time ≤8.5 days<br>
+                • Automation rate ≥65%<br>
+                • Error reduction 40%
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # High-Risk Member Case Management
     st.markdown("""
-    <div style="background: linear-gradient(90deg, #fdebeb 0%, #ffffff 100%); border-left: 4px solid #e74c3c; padding: 20px; border-radius: 8px; margin: 15px 0;">
-        <h4 style="color: #c0392b; margin: 0 0 15px 0;">🏥 High-Risk Member Case Management Program</h4>
-        <p><strong>Objective:</strong> Implement intensive case management for 850 high-risk members to reduce cost trajectory</p>
+    <div style="background: white; padding: 1.5rem; border-left: 3px solid #bf616a; margin-bottom: 2rem;">
+        <h4 style="color: #bf616a; font-size: 1.2rem; margin: 0 0 1rem 0; text-transform: uppercase;">
+            🏥 High-Risk Member Case Management Program
+        </h4>
+        <div style="color: #1f2937; font-size: 1rem; margin-bottom: 1rem; font-weight: 500;">
+            Implement intensive case management for 425 high-risk members to reduce cost trajectory
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.markdown("**💰 Investment:** $1.2M")
-        st.markdown("**⏱️ Timeline:** 60 Days")
-    with col2:
-        st.markdown("**💵 Annual Savings:** $8.7M")
-        st.markdown("**📈 ROI:** 725%")
-    with col3:
-        st.markdown("**🎯 Success Metrics:**")
-        st.markdown("• High-risk cost growth ≤8%")
-        st.markdown("• Hospital readmissions -30%")
+        st.markdown("""
+        <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">$1.2M</div>
+            <div style="font-size: 0.9rem; color: #6b7280; font-weight: 600;">INVESTMENT</div>
+            <div style="font-size: 0.8rem; color: #6b7280; margin-top: 0.5rem;">60 Days Timeline</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    # Priority 2: Strategic Initiatives
-    st.subheader("📈 Priority 2: Strategic Initiatives (3-12 Months)")
+    with col2:
+        st.markdown("""
+        <div style="background: #f0f9ff; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">$8.7M</div>
+            <div style="font-size: 0.9rem; color: #6b7280; font-weight: 600;">ANNUAL SAVINGS</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; margin-top: 0.5rem; font-weight: 500;">725% ROI</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div style="background: #f7fee7; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; margin-bottom: 0.5rem;">SUCCESS METRICS</div>
+            <div style="font-size: 0.8rem; color: #6b7280;">
+                • High-risk cost growth ≤8%<br>
+                • Hospital readmissions -30%<br>
+                • Care coordination +85%
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # Priority 2: Strategic Initiatives - UN Style
+    st.markdown("""
+    <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 3rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+        Priority 2: Strategic Initiatives (3-12 Months)
+    </h3>
+    """, unsafe_allow_html=True)
 
     # Provider Network Optimization
     st.markdown("""
-    <div style="background: linear-gradient(90deg, #fef5e7 0%, #ffffff 100%); border-left: 4px solid #f39c12; padding: 20px; border-radius: 8px; margin: 15px 0;">
-        <h4 style="color: #d68910; margin: 0 0 15px 0;">🤝 Provider Network Optimization</h4>
-        <p><strong>Objective:</strong> Increase volume allocation to top-performing providers while improving underperformers</p>
+    <div style="background: white; padding: 1.5rem; border-left: 3px solid #d08770; margin-bottom: 2rem;">
+        <h4 style="color: #d08770; font-size: 1.2rem; margin: 0 0 1rem 0; text-transform: uppercase;">
+            🤝 Provider Network Optimization
+        </h4>
+        <div style="color: #1f2937; font-size: 1rem; margin-bottom: 1rem; font-weight: 500;">
+            Increase volume allocation to top-performing providers while improving underperformers
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.markdown("**💰 Investment:** $450K")
-        st.markdown("**⏱️ Timeline:** 6 Months")
+        st.markdown("""
+        <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">$450K</div>
+            <div style="font-size: 0.9rem; color: #6b7280; font-weight: 600;">INVESTMENT</div>
+            <div style="font-size: 0.8rem; color: #6b7280; margin-top: 0.5rem;">6 Months Timeline</div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col2:
-        st.markdown("**💵 Annual Savings:** $2.4M")
-        st.markdown("**📈 ROI:** 533%")
+        st.markdown("""
+        <div style="background: #f0f9ff; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">$2.4M</div>
+            <div style="font-size: 0.9rem; color: #6b7280; font-weight: 600;">ANNUAL SAVINGS</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; margin-top: 0.5rem; font-weight: 500;">533% ROI</div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col3:
-        st.markdown("**🎯 Success Metrics:**")
-        st.markdown("• Top-tier provider volume +35%")
-        st.markdown("• Network denial rate ≤1.8%")
+        st.markdown("""
+        <div style="background: #f7fee7; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; margin-bottom: 0.5rem;">SUCCESS METRICS</div>
+            <div style="font-size: 0.8rem; color: #6b7280;">
+                • Top-tier provider volume +35%<br>
+                • Network denial rate ≤1.8%<br>
+                • Quality scores +15%
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    cost_opps = data.get('recommendations', {}).get('cost_optimization', [])
-    if not cost_opps:
-        cost_opps = [
-            {'category': 'Provider Negotiations', 'savings': 2400000, 'difficulty': 'Medium'},
-            {'category': 'Generic Drug Programs', 'savings': 1800000, 'difficulty': 'Low'},
-            {'category': 'Preventive Care', 'savings': 3200000, 'difficulty': 'High'}
-        ]
-
-    quality_imps = data.get('recommendations', {}).get('quality_improvements', [])
-    if not quality_imps:
-        quality_imps = [
-            {'area': 'Claims Processing', 'impact': 'High', 'timeline': '6 months'},
-            {'area': 'Provider Network', 'impact': 'Medium', 'timeline': '12 months'},
-            {'area': 'Member Engagement', 'impact': 'High', 'timeline': '9 months'}
-        ]
+    # Implementation Framework - UN Style
+    st.markdown("""
+    <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 3rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+        Implementation Framework & Resource Allocation
+    </h3>
+    """, unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.subheader("💰 Cost Optimization")
-
-        for opp in cost_opps:
-            with st.expander(f"{opp['opportunity']} - ${opp['potential_savings']/1000000:.1f}M Savings"):
-                st.write(f"**Action:** {opp['action']}")
-                st.write(f"**Potential Savings:** ${opp['potential_savings']:,}")
-                if 'provider_count' in opp:
-                    st.write(f"**Providers Affected:** {opp['provider_count']}")
-                if 'member_count' in opp:
-                    st.write(f"**Members Affected:** {opp['member_count']}")
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #5e81ac; margin-bottom: 1rem;">
+            <h4 style="color: #5e81ac; font-size: 1.1rem; margin: 0 0 1rem 0; text-transform: uppercase;">
+                Cost Optimization Initiatives
+            </h4>
+            <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">
+                Strategic approaches to reduce operational expenses while maintaining quality
+            </div>
+            <div style="color: #1f2937; font-size: 0.8rem;">
+                <strong>Provider Negotiations:</strong> $2.4M savings potential<br>
+                <strong>Generic Drug Programs:</strong> $1.8M savings potential<br>
+                <strong>Preventive Care Focus:</strong> $3.2M savings potential<br>
+                <strong>Automation Implementation:</strong> $4.9M savings potential
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.subheader("📈 Quality Improvements")
-
-        for imp in quality_imps:
-            with st.expander(f"{imp['area']} Optimization"):
-                st.write(f"**Recommendation:** {imp['recommendation']}")
-                if 'current_avg_days' in imp:
-                    st.write(f"**Current:** {imp['current_avg_days']:.1f} days")
-                    st.write(f"**Target:** {imp['target_days']:.1f} days")
-                if 'current_denial_rate' in imp:
-                    st.write(f"**Current Denial Rate:** {imp['current_denial_rate']:.1%}")
-                    st.write(f"**Target Denial Rate:** {imp['target_denial_rate']:.1%}")
+        st.markdown("""
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #a3be8c; margin-bottom: 1rem;">
+            <h4 style="color: #a3be8c; font-size: 1.1rem; margin: 0 0 1rem 0; text-transform: uppercase;">
+                Quality Enhancement Programs
+            </h4>
+            <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">
+                Systematic improvements to operational efficiency and member outcomes
+            </div>
+            <div style="color: #1f2937; font-size: 0.8rem;">
+                <strong>Claims Processing:</strong> 6 months timeline, high impact<br>
+                <strong>Provider Network:</strong> 12 months timeline, medium impact<br>
+                <strong>Member Engagement:</strong> 9 months timeline, high impact<br>
+                <strong>Risk Management:</strong> 3 months timeline, high impact
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 def render_sidebar():
     """Render custom sidebar navigation"""
