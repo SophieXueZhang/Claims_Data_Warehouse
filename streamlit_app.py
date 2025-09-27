@@ -461,7 +461,9 @@ def display_executive_summary(data):
     with col1:
         st.markdown("""
         <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem;">
+                    border: 1px solid #e2e8f0; margin-bottom: 1rem;
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+                    transition: box-shadow 0.2s ease;">
             <h4 style="margin-top: 0; color: #1a202c;">💰 Financial Metrics</h4>
         """, unsafe_allow_html=True)
 
@@ -498,7 +500,9 @@ def display_executive_summary(data):
     with col2:
         st.markdown("""
         <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem;">
+                    border: 1px solid #e2e8f0; margin-bottom: 1rem;
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+                    transition: box-shadow 0.2s ease;">
             <h4 style="margin-top: 0; color: #1a202c;">🏥 Top Providers</h4>
         """, unsafe_allow_html=True)
 
@@ -518,48 +522,119 @@ def display_executive_summary(data):
 
 def display_kpi_dashboard(data):
     """Display comprehensive KPI dashboard"""
-    st.header("🎯 Key Performance Indicators")
+    st.markdown("""
+    <div style="background: #ffffff; padding: 2rem; margin: -1rem -1rem 2rem -1rem;
+                border-left: 4px solid #5e81ac; border-bottom: 1px solid #e5e7eb;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <h1 style="color: #1f2937; font-size: 2.2rem; font-weight: 600; margin-bottom: 0.5rem;
+                           letter-spacing: -0.01em; line-height: 1.2;">
+                    Healthcare Claims Analytics Report
+                </h1>
+                <p style="color: #6b7280; font-size: 1rem; font-weight: 400; margin: 0;">
+                    Executive Performance Overview & Strategic Insights
+                </p>
+            </div>
+            <div style="text-align: right;">
+                <div style="color: #5e81ac; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.25rem;">
+                    REPORTING PERIOD
+                </div>
+                <div style="color: #1f2937; font-size: 1.1rem; font-weight: 600;">
+                    Q4 2024
+                </div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-    # Executive Summary Section - Nordic Style
+    # In Focus Section - UN Report Style
+    st.markdown("""
+    <div style="background: #f8fafc; padding: 2rem; margin: 2rem 0; border-left: 4px solid #5e81ac;">
+        <h2 style="color: #5e81ac; font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+            In Focus: Healthcare Claims Performance Drives Record Impact
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 1.5rem;">
+            <div>
+                <div style="color: #1f2937; font-size: 1rem; font-weight: 500; margin-bottom: 1rem;">
+                    <strong>48,500+ CLAIMS PROCESSED</strong><br>
+                    <span style="color: #6b7280; font-weight: 400;">As of Q4 2024</span>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                    <div style="width: 80px; height: 80px; background: #5e81ac; color: white; border-radius: 50%;
+                                display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; margin-right: 1rem;">
+                        97.7%
+                    </div>
+                    <div style="color: #374151; font-size: 0.9rem; line-height: 1.4;">
+                        <strong>claims approved</strong><br>
+                        effectively reducing member<br>
+                        financial burden
+                    </div>
+                </div>
+            </div>
+            <div style="color: #374151; font-size: 0.9rem; line-height: 1.6;">
+                <div style="margin-bottom: 1rem;">
+                    <strong>New claims processing challenges caused by complex medical conditions</strong>
+                </div>
+                <div style="margin-bottom: 0.5rem;">
+                    <span style="background: #ebf3ff; color: #5e81ac; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">
+                        $11.1M in cost optimization opportunities identified
+                    </span>
+                </div>
+                <div style="color: #6b7280; font-size: 0.85rem;">
+                    Source: Healthcare Claims Processing Analysis / Q4 2024
+                </div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Key Performance Indicators Grid
+    st.markdown("""
+    <h3 style="color: #1f2937; font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.02em;">
+        Key Performance Indicators
+    </h3>
+    """, unsafe_allow_html=True)
+
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem; text-align: center;">
-            <div style="font-size: 2rem; font-weight: bold; color: #5e81ac; margin-bottom: 0.5rem;">B+</div>
-            <div style="font-size: 0.9rem; color: #1a202c; font-weight: 500;">Overall Health Score</div>
-            <div style="font-size: 0.8rem; color: #718096;">83/100</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #3b82f6;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #3b82f6; margin-bottom: 0.25rem;">$9.7K</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Average Claim Amount</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">↗ +12% vs Q3</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col2:
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem; text-align: center;">
-            <div style="font-size: 1.2rem; font-weight: bold; color: #bf616a; margin-bottom: 0.5rem;">Processing Delay</div>
-            <div style="font-size: 0.9rem; color: #1a202c; font-weight: 500;">Biggest Risk</div>
-            <div style="font-size: 0.8rem; color: #718096;">46% above target</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #dc2626;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #bf616a; margin-bottom: 0.25rem;">12.4</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Processing Days</div>
+            <div style="font-size: 0.8rem; color: #bf616a; font-weight: 500; margin-top: 0.5rem;">⚠ 46% above target</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col3:
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem; text-align: center;">
-            <div style="font-size: 1.4rem; font-weight: bold; color: #5e81ac; margin-bottom: 0.5rem;">$11.1M</div>
-            <div style="font-size: 0.9rem; color: #1a202c; font-weight: 500;">Savings Opportunity</div>
-            <div style="font-size: 0.8rem; color: #718096;">Process optimization</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #059669;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #a3be8c; margin-bottom: 0.25rem;">2.3%</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Denial Rate</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">✓ Industry leading</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col4:
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem; text-align: center;">
-            <div style="font-size: 1.2rem; font-weight: bold; color: #a3be8c; margin-bottom: 0.5rem;">Quality</div>
-            <div style="font-size: 0.9rem; color: #1a202c; font-weight: 500;">Strength Area</div>
-            <div style="font-size: 0.8rem; color: #718096;">43% below industry denial rate</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid #7c3aed;
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: #b48ead; margin-bottom: 0.25rem;">5.0</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Claims Per Member</div>
+            <div style="font-size: 0.8rem; color: #b48ead; font-weight: 500; margin-top: 0.5rem;">↔ Stable utilization</div>
+        </div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -620,33 +695,33 @@ def display_kpi_dashboard(data):
     with col1:
         avg_amount_color = "#a3be8c" if financial['avg_claim_amount'] < 10000 else "#ebcb8b" if financial['avg_claim_amount'] < 15000 else "#bf616a"
         st.markdown(f"""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem; text-align: center;">
-            <div style="font-size: 1.6rem; font-weight: bold; color: {avg_amount_color}; margin-bottom: 0.5rem;">${financial['avg_claim_amount']:,}</div>
-            <div style="font-size: 0.9rem; color: #1a202c; font-weight: 500;">Average Claim Amount</div>
-            <div style="font-size: 0.75rem; color: #718096; margin-top: 0.3rem;">↗️ +12% vs Q3</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid {avg_amount_color};
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: {avg_amount_color}; margin-bottom: 0.25rem;">${financial['avg_claim_amount']:,}</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Average Claim Amount</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">↗ +12% vs Q3</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col2:
         processing_color = "#bf616a" if quality['processing_time'] > 10 else "#ebcb8b" if quality['processing_time'] > 8 else "#a3be8c"
         st.markdown(f"""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem; text-align: center;">
-            <div style="font-size: 1.6rem; font-weight: bold; color: {processing_color}; margin-bottom: 0.5rem;">{quality['processing_time']:.1f}</div>
-            <div style="font-size: 0.9rem; color: #1a202c; font-weight: 500;">Processing Days</div>
-            <div style="font-size: 0.75rem; color: #bf616a; margin-top: 0.3rem;">46% above target</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid {processing_color};
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: {processing_color}; margin-bottom: 0.25rem;">{quality['processing_time']:.1f}</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Processing Days</div>
+            <div style="font-size: 0.8rem; color: #bf616a; font-weight: 500; margin-top: 0.5rem;">⚠ 46% above target</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col3:
         denial_color = "#a3be8c" if quality['denial_rate'] < 0.03 else "#ebcb8b" if quality['denial_rate'] < 0.05 else "#bf616a"
         st.markdown(f"""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem; text-align: center;">
-            <div style="font-size: 1.6rem; font-weight: bold; color: {denial_color}; margin-bottom: 0.5rem;">{quality['denial_rate']:.1%}</div>
-            <div style="font-size: 0.9rem; color: #1a202c; font-weight: 500;">Denial Rate</div>
-            <div style="font-size: 0.75rem; color: #a3be8c; margin-top: 0.3rem;">43% below industry</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid {denial_color};
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: {denial_color}; margin-bottom: 0.25rem;">{quality['denial_rate']:.1%}</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Denial Rate</div>
+            <div style="font-size: 0.8rem; color: #a3be8c; font-weight: 500; margin-top: 0.5rem;">✓ Industry leading</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -654,11 +729,11 @@ def display_kpi_dashboard(data):
         risk_pct = (risk['high_cost_members'] / 10000) * 100
         risk_color = "#bf616a" if risk_pct > 10 else "#ebcb8b" if risk_pct > 7 else "#a3be8c"
         st.markdown(f"""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem; text-align: center;">
-            <div style="font-size: 1.6rem; font-weight: bold; color: {risk_color}; margin-bottom: 0.5rem;">{risk_pct:.1f}%</div>
-            <div style="font-size: 0.9rem; color: #1a202c; font-weight: 500;">High-Risk Members</div>
-            <div style="font-size: 0.75rem; color: #bf616a; margin-top: 0.3rem;">↗️ +15% growth</div>
+        <div style="background: white; padding: 1.5rem; border-left: 3px solid {risk_color};
+                    margin-bottom: 1rem; text-align: left;">
+            <div style="font-size: 2.5rem; font-weight: 700; color: {risk_color}; margin-bottom: 0.25rem;">5.0</div>
+            <div style="font-size: 0.9rem; color: #1f2937; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;">Claims Per Member</div>
+            <div style="font-size: 0.8rem; color: #b48ead; font-weight: 500; margin-top: 0.5rem;">↔ Stable utilization</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -666,55 +741,68 @@ def display_kpi_dashboard(data):
     if quality['processing_time'] > 10:
         st.warning("⚠️ **Processing Time Alert:** 46% above 8.5-day target - immediate action required")
 
-    # Strategic Action Items Section - Nordic Style
-    st.subheader("⚡ Strategic Action Items")
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem;">
-            <h4 style="color: #bf616a; margin-top: 0; margin-bottom: 1rem;">Immediate Actions (Next 30 Days)</h4>
-            <div style="color: #1a202c; line-height: 1.6;">
-                <div style="margin-bottom: 0.8rem;"><strong>Process Optimization:</strong> Deploy automation for standard claims</div>
-                <div style="margin-bottom: 0.8rem;"><strong>Resource Allocation:</strong> Add 2 senior adjusters</div>
-                <div style="margin-bottom: 0.8rem;"><strong>Target:</strong> Reduce processing time to 9 days</div>
-                <div style="color: #5e81ac; font-weight: 600;"><strong>Expected Savings:</strong> $2.4M annually</div>
+    # Strategic Impact Section - UN Report Style
+    st.markdown("""
+    <div style="background: white; padding: 2rem; margin: 2rem 0; border-left: 4px solid #bf616a;">
+        <h3 style="color: #bf616a; font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em;">
+            Strategic Impact Opportunities
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+            <div style="text-align: center;">
+                <div style="width: 120px; height: 120px; background: #5e81ac; color: white; border-radius: 50%;
+                            display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto;">
+                    <div>
+                        <div style="font-size: 1.8rem; font-weight: bold;">$2.4M</div>
+                        <div style="font-size: 0.8rem; font-weight: 500;">ANNUAL</div>
+                    </div>
+                </div>
+                <div style="color: #1f2937; font-weight: 600; margin-bottom: 0.5rem;">Process Automation</div>
+                <div style="color: #6b7280; font-size: 0.9rem; line-height: 1.4;">
+                    Deploy automation for standard claims processing to reduce manual review time
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 120px; height: 120px; background: #a3be8c; color: white; border-radius: 50%;
+                            display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto;">
+                    <div>
+                        <div style="font-size: 1.8rem; font-weight: bold;">$5.8M</div>
+                        <div style="font-size: 0.8rem; font-weight: 500;">ANNUAL</div>
+                    </div>
+                </div>
+                <div style="color: #1f2937; font-weight: 600; margin-bottom: 0.5rem;">Risk Intervention</div>
+                <div style="color: #6b7280; font-size: 0.9rem; line-height: 1.4;">
+                    High-cost member outreach and chronic condition management programs
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 120px; height: 120px; background: #b48ead; color: white; border-radius: 50%;"
+                            display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto;">
+                    <div>
+                        <div style="font-size: 1.6rem; font-weight: bold;">$11.1M</div>
+                        <div style="font-size: 0.8rem; font-weight: 500;">3-YEAR ROI</div>
+                    </div>
+                </div>
+                <div style="color: #1f2937; font-weight: 600; margin-bottom: 0.5rem;">Total Strategic Impact</div>
+                <div style="color: #6b7280; font-size: 0.9rem; line-height: 1.4;">
+                    Combined impact of predictive analytics and operational excellence initiatives
+                </div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
-    with col2:
-        st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem;">
-            <h4 style="color: #5e81ac; margin-top: 0; margin-bottom: 1rem;">90-Day Initiatives</h4>
-            <div style="color: #1a202c; line-height: 1.6;">
-                <div style="margin-bottom: 0.8rem;"><strong>Risk Intervention:</strong> High-cost member outreach program</div>
-                <div style="margin-bottom: 0.8rem;"><strong>Care Coordination:</strong> Chronic condition management</div>
-                <div style="margin-bottom: 0.8rem;"><strong>Target:</strong> 25% reduction in high-risk members</div>
-                <div style="color: #5e81ac; font-weight: 600;"><strong>Expected Savings:</strong> $5.8M annually</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
 
-    with col3:
-        st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 16px;
-                    border: 1px solid #e2e8f0; margin-bottom: 1rem;">
-            <h4 style="color: #a3be8c; margin-top: 0; margin-bottom: 1rem;">Strategic Goals (6-12 Months)</h4>
-            <div style="color: #1a202c; line-height: 1.6;">
-                <div style="margin-bottom: 0.8rem;"><strong>Predictive Analytics:</strong> AI-powered fraud detection</div>
-                <div style="margin-bottom: 0.8rem;"><strong>Member Engagement:</strong> Wellness program expansion</div>
-                <div style="margin-bottom: 0.8rem;"><strong>Target:</strong> 15% overall cost reduction</div>
-                <div style="color: #a3be8c; font-weight: 600;"><strong>Total ROI:</strong> $11.1M over 3 years</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    # Performance Tracking Dashboard
-    st.subheader("📊 Performance Tracking")
+    # Performance Tracking Dashboard - Professional Style
+    st.markdown("""
+    <div style="margin: 3rem 0 1.5rem 0;">
+        <h2 style="color: #2d3748; font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em;">
+            Performance Tracking
+        </h2>
+        <p style="color: #718096; font-size: 1rem; margin: 0;">
+            Real-time operational metrics and trend analysis
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
 
