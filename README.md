@@ -6,13 +6,16 @@
 [![dbt](https://img.shields.io/badge/dbt-1.6+-orange.svg)](https://www.getdbt.com/)
 [![SQL](https://img.shields.io/badge/SQL-PostgreSQL-blue.svg)](https://www.postgresql.org/)
 
-## 📊 Dashboard Preview
+## 📊 Live Dashboard
 
-### Executive Summary Dashboard
-![Home Dashboard](https://github.com/SophieXueZhang/Claims_Data_Warehouse/raw/main/docs/screenshots/home-dashboard.png)
+**View the interactive dashboard**: [claims-data-warehouse.streamlit.app](https://claims-data-warehouse.streamlit.app)
 
-### Analytics Performance Report
-![Analytics Dashboard](https://github.com/SophieXueZhang/Claims_Data_Warehouse/raw/main/docs/screenshots/analytics-dashboard.png)
+Features:
+- **Executive Summary** - Key metrics and KPI overview
+- **Analytics Dashboard** - Performance tracking and trends
+- **Provider Analysis** - Network quality assessment
+- **Risk Analysis** - Member risk stratification
+- **Strategic Recommendations** - ROI-based action plans
 
 ## 🚀 Quick Start
 
